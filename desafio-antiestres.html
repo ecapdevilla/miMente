@@ -1,0 +1,552 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Desafío Anti-Estrés</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+        }
+        
+        :root {
+            --primary: #4a4a9c;
+            --secondary: #6c6c9c;
+            --accent: #FF9E6D;
+            --light: #f5f7fa;
+            --dark: #333;
+            --success: #06D6A0;
+            --warning: #EF476F;
+            --info: #4ECDC4;
+        }
+        
+        body {
+            background: linear-gradient(135deg, #f5f7fa 0%, #c3cfe2 100%);
+            min-height: 100vh;
+            color: var(--dark);
+            line-height: 1.6;
+            padding: 20px;
+        }
+        
+        .container {
+            max-width: 800px;
+            margin: 0 auto;
+            background-color: white;
+            border-radius: 15px;
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.1);
+            overflow: hidden;
+        }
+        
+        header {
+            background: linear-gradient(135deg, var(--primary) 0%, var(--secondary) 100%);
+            color: white;
+            padding: 25px;
+            text-align: center;
+        }
+        
+        h1 {
+            font-size: 2.2rem;
+            margin-bottom: 10px;
+        }
+        
+        .subtitle {
+            font-size: 1.1rem;
+            opacity: 0.9;
+        }
+        
+        .game-container {
+            padding: 25px;
+        }
+        
+        .progress-container {
+            margin-bottom: 25px;
+        }
+        
+        .progress-bar {
+            height: 10px;
+            background-color: #eee;
+            border-radius: 5px;
+            overflow: hidden;
+        }
+        
+        .progress {
+            height: 100%;
+            background-color: var(--accent);
+            width: 0%;
+            transition: width 0.5s;
+        }
+        
+        .progress-text {
+            display: flex;
+            justify-content: space-between;
+            margin-top: 5px;
+            font-size: 0.9rem;
+            color: var(--secondary);
+        }
+        
+        .score-container {
+            text-align: center;
+            margin-bottom: 20px;
+            padding: 15px;
+            background-color: #f8f9fa;
+            border-radius: 10px;
+        }
+        
+        .score {
+            font-size: 1.8rem;
+            font-weight: bold;
+            color: var(--primary);
+        }
+        
+        .scenario {
+            background-color: #f8f9fa;
+            padding: 20px;
+            border-radius: 10px;
+            margin-bottom: 25px;
+        }
+        
+        .scenario-title {
+            color: var(--primary);
+            margin-bottom: 15px;
+            font-size: 1.3rem;
+        }
+        
+        .scenario-text {
+            margin-bottom: 20px;
+            line-height: 1.6;
+        }
+        
+        .options {
+            display: grid;
+            gap: 15px;
+            margin-bottom: 25px;
+        }
+        
+        .option {
+            padding: 15px;
+            border: 2px solid #ddd;
+            border-radius: 10px;
+            cursor: pointer;
+            transition: all 0.3s;
+            background-color: white;
+        }
+        
+        .option:hover {
+            border-color: var(--primary);
+            background-color: #f0f2ff;
+        }
+        
+        .option.selected {
+            border-color: var(--accent);
+            background-color: #fff4ec;
+        }
+        
+        .feedback {
+            display: none;
+            padding: 20px;
+            border-radius: 10px;
+            margin-bottom: 25px;
+        }
+        
+        .feedback.correct {
+            background-color: #e6f7f0;
+            border-left: 5px solid var(--success);
+        }
+        
+        .feedback.incorrect {
+            background-color: #fde8ec;
+            border-left: 5px solid var(--warning);
+        }
+        
+        .feedback-title {
+            font-weight: bold;
+            margin-bottom: 10px;
+        }
+        
+        .next-btn {
+            display: none;
+            background-color: var(--primary);
+            color: white;
+            border: none;
+            padding: 12px 25px;
+            border-radius: 8px;
+            font-weight: bold;
+            cursor: pointer;
+            transition: background-color 0.3s;
+            margin: 0 auto;
+        }
+        
+        .next-btn:hover {
+            background-color: var(--secondary);
+        }
+        
+        .results {
+            display: none;
+            text-align: center;
+            padding: 30px;
+        }
+        
+        .results-title {
+            color: var(--primary);
+            margin-bottom: 20px;
+            font-size: 1.8rem;
+        }
+        
+        .results-score {
+            font-size: 3rem;
+            font-weight: bold;
+            color: var(--accent);
+            margin-bottom: 20px;
+        }
+        
+        .results-message {
+            margin-bottom: 25px;
+            font-size: 1.1rem;
+        }
+        
+        .restart-btn {
+            background-color: var(--accent);
+            color: var(--dark);
+            border: none;
+            padding: 12px 25px;
+            border-radius: 8px;
+            font-weight: bold;
+            cursor: pointer;
+            transition: background-color 0.3s;
+            margin-right: 10px;
+        }
+        
+        .restart-btn:hover {
+            background-color: #ff8a4d;
+        }
+        
+        .back-btn {
+            background-color: var(--primary);
+            color: white;
+            border: none;
+            padding: 12px 25px;
+            border-radius: 8px;
+            font-weight: bold;
+            cursor: pointer;
+            transition: background-color 0.3s;
+            text-decoration: none;
+            display: inline-block;
+        }
+        
+        .back-btn:hover {
+            background-color: var(--secondary);
+        }
+        
+        .btn-container {
+            margin-top: 20px;
+            text-align: center;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <header>
+            <h1>Desafío Anti-Estrés</h1>
+            <p class="subtitle">Toma decisiones saludables frente a la presión académica</p>
+        </header>
+        
+        <div class="game-container">
+            <div class="progress-container">
+                <div class="progress-bar">
+                    <div class="progress" id="progress"></div>
+                </div>
+                <div class="progress-text">
+                    <span>Progreso: <span id="current-question">1</span>/5</span>
+                    <span>Puntuación: <span id="current-score">0</span>/100</span>
+                </div>
+            </div>
+            
+            <div class="score-container">
+                <div>Tu puntuación actual:</div>
+                <div class="score" id="score">0</div>
+            </div>
+            
+            <div id="scenario-container">
+                <!-- Los escenarios se cargarán dinámicamente aquí -->
+            </div>
+            
+            <div id="results" class="results">
+                <!-- Los resultados se mostrarán aquí al final -->
+            </div>
+            
+            <div class="btn-container">
+                <a href="index.html" class="back-btn">Volver al menú principal</a>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        // Datos del juego
+        const scenarios = [
+            {
+                id: 1,
+                title: "Examen sorpresa",
+                text: "Tu profesor anuncia un examen sorpresa para mañana. Tienes muchas otras tareas pendientes y te sientes abrumado/a.",
+                options: [
+                    {
+                        text: "Te quedas despierto/a toda la noche estudiando, aunque eso signifique dormir solo 2 horas",
+                        correct: false,
+                        feedback: "Esta opción puede parecer dedicada, pero la falta de sueño afecta tu memoria y concentración. No es sostenible a largo plazo."
+                    },
+                    {
+                        text: "Organizas tu tiempo: estudias 2 horas esta noche, duermes bien y repasas 1 hora antes del examen",
+                        correct: true,
+                        feedback: "¡Excelente! Priorizar el sueño y organizar tu tiempo es clave para el rendimiento académico y la salud mental."
+                    },
+                    {
+                        text: "Decides no estudiar porque 'total, es solo un examen' y te dedicas a otras actividades",
+                        correct: false,
+                        feedback: "Evitar la responsabilidad puede aumentar el estrés a largo plazo. Es mejor enfrentar los desafíos de manera equilibrada."
+                    }
+                ]
+            },
+            {
+                id: 2,
+                title: "Múltiples tareas",
+                text: "Tienes 3 trabajos importantes para entregar en la misma semana y no sabes por dónde empezar.",
+                options: [
+                    {
+                        text: "Intentas hacer todos a la vez, cambiando de uno a otro constantemente",
+                        correct: false,
+                        feedback: "El multitasking reduce la calidad de tu trabajo y aumenta el estrés. No es una estrategia efectiva."
+                    },
+                    {
+                        text: "Priorizas las tareas, creas un calendario y trabajas en una cosa a la vez",
+                        correct: true,
+                        feedback: "¡Perfecto! Priorizar y planificar reduce la sensación de agobio y mejora la calidad de tu trabajo."
+                    },
+                    {
+                        text: "Pospones todo hasta el último día y luego trabajas bajo presión",
+                        correct: false,
+                        feedback: "La procrastinación aumenta significativamente el estrés y reduce la calidad de tus trabajos."
+                    }
+                ]
+            },
+            {
+                id: 3,
+                title: "Conflicto de horarios",
+                text: "Tienes un examen importante y una actividad extracurricular que te apasiona el mismo día. No quieres faltar a ninguna.",
+                options: [
+                    {
+                        text: "Vas a la actividad y estudias para el examen después, aunque sea muy tarde",
+                        correct: false,
+                        feedback: "Sacrificar el sueño afectará tu rendimiento en el examen. Necesitas encontrar un equilibrio."
+                    },
+                    {
+                        text: "Hablas con tu profesor para ver si hay flexibilidad o con el organizador de la actividad para llegar tarde",
+                        correct: true,
+                        feedback: "¡Muy bien! La comunicación asertiva ayuda a encontrar soluciones que respeten tus necesidades académicas y personales."
+                    },
+                    {
+                        text: "Decides faltar a ambas actividades porque la situación te genera mucha ansiedad",
+                        correct: false,
+                        feedback: "Evitar la situación no resuelve el problema y puede aumentar la ansiedad a largo plazo."
+                    }
+                ]
+            },
+            {
+                id: 4,
+                title: "Baja calificación",
+                text: "Recibes una calificación más baja de lo esperado en un trabajo importante. Te sientes frustrado/a y desmotivado/a.",
+                options: [
+                    {
+                        text: "Ignoras el resultado y sigues adelante sin analizar qué salió mal",
+                        correct: false,
+                        feedback: "Perder la oportunidad de aprender de los errores te impedirá mejorar en el futuro."
+                    },
+                    {
+                        text: "Solicitas retroalimentación a tu profesor y usas esa información para mejorar",
+                        correct: true,
+                        feedback: "¡Excelente actitud! Aprender de los errores es fundamental para el crecimiento académico y personal."
+                    },
+                    {
+                        text: "Te desmoralizas y dejas de esforzarte en esa materia",
+                        correct: false,
+                        feedback: "Una calificación baja no define tu capacidad. Abandonar el esfuerzo solo empeorará la situación."
+                    }
+                ]
+            },
+            {
+                id: 5,
+                title: "Agotamiento",
+                text: "Llevas semanas con mucho trabajo académico y empiezas a sentirte agotado/a, irritable y con dificultad para concentrarte.",
+                options: [
+                    {
+                        text: "Ignoras las señales y sigues trabajando al mismo ritmo",
+                        correct: false,
+                        feedback: "Ignorar el agotamiento puede llevar al burnout, afectando tu salud y rendimiento académico."
+                    },
+                    {
+                        text: "Reconoces que necesitas un descanso, programas pausas activas y actividades de autocuidado",
+                        correct: true,
+                        feedback: "¡Muy sabio! El autocuidado no es un lujo, es una necesidad para mantener un rendimiento sostenible."
+                    },
+                    {
+                        text: "Tomas estimulantes para mantenerte despierto/a y seguir trabajando",
+                        correct: false,
+                        feedback: "Los estimulantes pueden proporcionar un impulso temporal pero no abordan la causa del agotamiento y pueden ser perjudiciales."
+                    }
+                ]
+            }
+        ];
+
+        // Variables del juego
+        let currentScenario = 0;
+        let score = 0;
+        let selectedOption = null;
+
+        // Elementos del DOM
+        const scenarioContainer = document.getElementById('scenario-container');
+        const progressBar = document.getElementById('progress');
+        const currentQuestionElement = document.getElementById('current-question');
+        const currentScoreElement = document.getElementById('current-score');
+        const scoreElement = document.getElementById('score');
+        const resultsContainer = document.getElementById('results');
+
+        // Inicializar el juego
+        function initGame() {
+            showScenario(currentScenario);
+            updateProgress();
+        }
+
+        // Mostrar escenario
+        function showScenario(index) {
+            const scenario = scenarios[index];
+            
+            let optionsHTML = '';
+            scenario.options.forEach((option, i) => {
+                optionsHTML += `
+                    <div class="option" data-index="${i}">
+                        ${option.text}
+                    </div>
+                `;
+            });
+            
+            scenarioContainer.innerHTML = `
+                <div class="scenario">
+                    <h2 class="scenario-title">${scenario.title}</h2>
+                    <p class="scenario-text">${scenario.text}</p>
+                    <div class="options">
+                        ${optionsHTML}
+                    </div>
+                </div>
+                <div id="feedback" class="feedback"></div>
+                <button id="next-btn" class="next-btn">Siguiente</button>
+            `;
+            
+            // Añadir event listeners a las opciones
+            const optionElements = document.querySelectorAll('.option');
+            optionElements.forEach(option => {
+                option.addEventListener('click', function() {
+                    // Deseleccionar todas las opciones
+                    optionElements.forEach(opt => opt.classList.remove('selected'));
+                    // Seleccionar la opción clickeada
+                    this.classList.add('selected');
+                    selectedOption = parseInt(this.getAttribute('data-index'));
+                    
+                    // Mostrar feedback
+                    showFeedback(scenario.options[selectedOption]);
+                });
+            });
+            
+            // Añadir event listener al botón siguiente
+            document.getElementById('next-btn').addEventListener('click', nextScenario);
+        }
+
+        // Mostrar feedback
+        function showFeedback(option) {
+            const feedbackElement = document.getElementById('feedback');
+            
+            if (option.correct) {
+                feedbackElement.className = 'feedback correct';
+                feedbackElement.innerHTML = `
+                    <div class="feedback-title">¡Respuesta correcta! +20 puntos</div>
+                    <div>${option.feedback}</div>
+                `;
+                score += 20;
+            } else {
+                feedbackElement.className = 'feedback incorrect';
+                feedbackElement.innerHTML = `
+                    <div class="feedback-title">Respuesta incorrecta</div>
+                    <div>${option.feedback}</div>
+                `;
+            }
+            
+            feedbackElement.style.display = 'block';
+            document.getElementById('next-btn').style.display = 'block';
+            
+            // Actualizar puntuación
+            scoreElement.textContent = score;
+            currentScoreElement.textContent = score;
+        }
+
+        // Siguiente escenario
+        function nextScenario() {
+            currentScenario++;
+            
+            if (currentScenario < scenarios.length) {
+                showScenario(currentScenario);
+                updateProgress();
+            } else {
+                showResults();
+            }
+        }
+
+        // Actualizar barra de progreso
+        function updateProgress() {
+            const progress = ((currentScenario + 1) / scenarios.length) * 100;
+            progressBar.style.width = `${progress}%`;
+            currentQuestionElement.textContent = currentScenario + 1;
+        }
+
+        // Mostrar resultados finales
+        function showResults() {
+            let message = '';
+            if (score >= 80) {
+                message = '¡Excelente! Tienes excelentes estrategias para manejar el estrés académico. Sigue aplicándolas.';
+            } else if (score >= 60) {
+                message = '¡Buen trabajo! Tienes buenas bases, pero hay áreas donde puedes mejorar tus estrategias antiestrés.';
+            } else {
+                message = 'Hay oportunidades para mejorar tus estrategias de manejo del estrés. Revisa los feedbacks y considera aplicar las opciones más saludables.';
+            }
+            
+            resultsContainer.innerHTML = `
+                <h2 class="results-title">¡Desafío Completado!</h2>
+                <div class="results-score">${score}/100</div>
+                <div class="results-message">${message}</div>
+                <button class="restart-btn" onclick="restartGame()">Jugar de nuevo</button>
+                <a href="index.html" class="back-btn">Volver al menú principal</a>
+            `;
+            
+            resultsContainer.style.display = 'block';
+            scenarioContainer.style.display = 'none';
+        }
+
+        // Reiniciar juego
+        function restartGame() {
+            currentScenario = 0;
+            score = 0;
+            selectedOption = null;
+            
+            resultsContainer.style.display = 'none';
+            scenarioContainer.style.display = 'block';
+            
+            scoreElement.textContent = '0';
+            currentScoreElement.textContent = '0';
+            
+            initGame();
+        }
+
+        // Inicializar el juego cuando se carga la página
+        window.onload = initGame;
+    </script>
+</body>
+</html>

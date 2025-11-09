@@ -1,0 +1,1218 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Ponte en mi Lugar | Empatía y Convivencia Escolar</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+        }
+        
+        :root {
+            --primary: #4A6FA5;
+            --secondary: #6B8CC0;
+            --accent: #FF9E6D;
+            --light: #F0F4F8;
+            --dark: #333;
+            --success: #06D6A0;
+            --warning: #EF476F;
+            --info: #4ECDC4;
+            --text: #444;
+        }
+        
+        body {
+            background: linear-gradient(135deg, #F0F4F8 0%, #E1E8F0 100%);
+            min-height: 100vh;
+            color: var(--text);
+            line-height: 1.6;
+            padding: 20px;
+        }
+        
+        .container {
+            max-width: 1200px;
+            width: 100%;
+            margin: 0 auto;
+        }
+        
+        header {
+            text-align: center;
+            padding: 30px 20px;
+            background: linear-gradient(135deg, var(--primary) 0%, var(--secondary) 100%);
+            border-radius: 20px;
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.15);
+            margin-bottom: 30px;
+            color: white;
+            position: relative;
+            overflow: hidden;
+        }
+        
+        header::before {
+            content: "";
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background: url('data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 100 100" preserveAspectRatio="none"><path d="M0,0 L100,0 L100,100 Z" fill="rgba(255,255,255,0.1)"/></svg>');
+            background-size: cover;
+        }
+        
+        h1 {
+            font-size: 3rem;
+            margin-bottom: 10px;
+            text-shadow: 2px 2px 4px rgba(0,0,0,0.2);
+            position: relative;
+        }
+        
+        .subtitle {
+            font-size: 1.3rem;
+            opacity: 0.9;
+            margin-bottom: 20px;
+            position: relative;
+        }
+        
+        .instructions {
+            background-color: rgba(255, 255, 255, 0.2);
+            padding: 15px;
+            border-radius: 10px;
+            margin-bottom: 20px;
+            text-align: left;
+            max-width: 800px;
+            margin-left: auto;
+            margin-right: auto;
+            position: relative;
+            backdrop-filter: blur(5px);
+        }
+        
+        .back-link {
+            display: inline-flex;
+            align-items: center;
+            margin-bottom: 15px;
+            color: white;
+            text-decoration: none;
+            font-weight: bold;
+            transition: all 0.3s;
+            position: relative;
+            padding: 8px 15px;
+            background: rgba(255,255,255,0.2);
+            border-radius: 8px;
+        }
+        
+        .back-link:hover {
+            background: rgba(255,255,255,0.3);
+            transform: translateX(-5px);
+        }
+        
+        .activities-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(350px, 1fr));
+            gap: 30px;
+            margin-bottom: 40px;
+        }
+        
+        .activity-card {
+            background: linear-gradient(135deg, #ffffff 0%, #f8f9fa 100%);
+            border-radius: 20px;
+            overflow: hidden;
+            box-shadow: 0 10px 20px rgba(0, 0, 0, 0.08);
+            transition: transform 0.3s, box-shadow 0.3s;
+            display: flex;
+            flex-direction: column;
+            position: relative;
+            border: 1px solid rgba(255,255,255,0.5);
+        }
+        
+        .activity-card:hover {
+            transform: translateY(-10px);
+            box-shadow: 0 15px 30px rgba(0, 0, 0, 0.15);
+        }
+        
+        .card-header {
+            padding: 25px;
+            text-align: center;
+            background: linear-gradient(135deg, var(--primary) 0%, var(--secondary) 100%);
+            color: white;
+        }
+        
+        .card-icon {
+            font-size: 3.5rem;
+            margin-bottom: 15px;
+        }
+        
+        .card-title {
+            font-size: 1.8rem;
+            margin-bottom: 10px;
+        }
+        
+        .card-body {
+            padding: 25px;
+            flex-grow: 1;
+            display: flex;
+            flex-direction: column;
+        }
+        
+        .card-description {
+            margin-bottom: 20px;
+            flex-grow: 1;
+        }
+        
+        .card-features {
+            margin-bottom: 25px;
+        }
+        
+        .card-features ul {
+            list-style-type: none;
+            padding-left: 0;
+        }
+        
+        .card-features li {
+            padding: 8px 0;
+            border-bottom: 1px solid #eee;
+            display: flex;
+            align-items: center;
+        }
+        
+        .card-features li:before {
+            content: "✓";
+            color: var(--success);
+            font-weight: bold;
+            margin-right: 10px;
+        }
+        
+        .btn {
+            display: inline-block;
+            padding: 12px 25px;
+            background: linear-gradient(135deg, var(--primary) 0%, var(--secondary) 100%);
+            color: white;
+            text-decoration: none;
+            border-radius: 10px;
+            font-weight: bold;
+            text-align: center;
+            transition: all 0.3s;
+            border: none;
+            cursor: pointer;
+            font-size: 1rem;
+            box-shadow: 0 5px 15px rgba(74, 111, 165, 0.3);
+        }
+        
+        .btn:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 8px 20px rgba(74, 111, 165, 0.4);
+        }
+        
+        .btn-block {
+            display: block;
+            width: 100%;
+        }
+        
+        .btn-accent {
+            background: linear-gradient(135deg, var(--accent) 0%, #ff8a4d 100%);
+            color: var(--dark);
+        }
+        
+        .btn-accent:hover {
+            box-shadow: 0 8px 20px rgba(255, 158, 109, 0.4);
+        }
+        
+        .btn-outline {
+            background: transparent;
+            border: 2px solid var(--primary);
+            color: var(--primary);
+        }
+        
+        .btn-outline:hover {
+            background: var(--primary);
+            color: white;
+        }
+        
+        /* Estilos para la simulación */
+        .simulation-container {
+            background: white;
+            border-radius: 20px;
+            padding: 30px;
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.08);
+            margin-bottom: 30px;
+            display: none;
+        }
+        
+        .simulation-container.active {
+            display: block;
+            animation: fadeIn 0.5s ease;
+        }
+        
+        @keyframes fadeIn {
+            from { opacity: 0; transform: translateY(20px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+        
+        .scenario-header {
+            display: flex;
+            align-items: center;
+            margin-bottom: 25px;
+            padding-bottom: 20px;
+            border-bottom: 1px solid #eee;
+        }
+        
+        .scenario-icon {
+            font-size: 3rem;
+            margin-right: 20px;
+            color: var(--primary);
+        }
+        
+        .scenario-title {
+            font-size: 1.8rem;
+            color: var(--primary);
+            flex-grow: 1;
+        }
+        
+        .scenario-description {
+            margin-bottom: 30px;
+            font-size: 1.1rem;
+            line-height: 1.7;
+            background: var(--light);
+            padding: 20px;
+            border-radius: 10px;
+            border-left: 5px solid var(--primary);
+        }
+        
+        .options-container {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 20px;
+            margin-bottom: 30px;
+        }
+        
+        .option-card {
+            background: #f8f9fa;
+            border-radius: 15px;
+            padding: 20px;
+            cursor: pointer;
+            transition: all 0.3s;
+            border: 2px solid transparent;
+        }
+        
+        .option-card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 8px 15px rgba(0,0,0,0.1);
+        }
+        
+        .option-card.selected {
+            border-color: var(--primary);
+            background: #e8f0fe;
+        }
+        
+        .option-icon {
+            font-size: 2rem;
+            margin-bottom: 10px;
+            color: var(--primary);
+        }
+        
+        .option-text {
+            font-weight: bold;
+            margin-bottom: 10px;
+        }
+        
+        .option-consequence {
+            font-size: 0.9rem;
+            color: #666;
+        }
+        
+        .feedback-container {
+            display: none;
+            background: #f8f9fa;
+            border-radius: 15px;
+            padding: 25px;
+            margin-bottom: 30px;
+            border-left: 5px solid var(--primary);
+        }
+        
+        .feedback-container.active {
+            display: block;
+            animation: fadeIn 0.5s ease;
+        }
+        
+        .feedback-title {
+            color: var(--primary);
+            margin-bottom: 15px;
+            font-size: 1.3rem;
+        }
+        
+        .feedback-content {
+            line-height: 1.6;
+        }
+        
+        .empathy-score {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 15px;
+            margin-bottom: 30px;
+            padding: 15px;
+            background: white;
+            border-radius: 15px;
+            box-shadow: 0 5px 15px rgba(0,0,0,0.05);
+        }
+        
+        .score-label {
+            font-weight: bold;
+            color: var(--primary);
+        }
+        
+        .score-value {
+            font-size: 1.5rem;
+            font-weight: bold;
+            color: var(--primary);
+        }
+        
+        .progress-container {
+            margin-bottom: 30px;
+        }
+        
+        .progress-bar {
+            height: 10px;
+            background: #e9ecef;
+            border-radius: 5px;
+            overflow: hidden;
+        }
+        
+        .progress {
+            height: 100%;
+            background: linear-gradient(135deg, var(--primary) 0%, var(--secondary) 100%);
+            width: 0%;
+            transition: width 0.5s ease;
+        }
+        
+        .progress-text {
+            display: flex;
+            justify-content: space-between;
+            margin-top: 5px;
+            font-size: 0.9rem;
+            color: var(--secondary);
+        }
+        
+        /* Estilos para juegos */
+        .games-container {
+            background: white;
+            border-radius: 20px;
+            padding: 30px;
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.08);
+            margin-bottom: 30px;
+            display: none;
+        }
+        
+        .games-container.active {
+            display: block;
+            animation: fadeIn 0.5s ease;
+        }
+        
+        .game-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 20px;
+            margin-bottom: 30px;
+        }
+        
+        .game-card {
+            background: #f8f9fa;
+            border-radius: 15px;
+            padding: 25px;
+            text-align: center;
+            cursor: pointer;
+            transition: all 0.3s;
+        }
+        
+        .game-card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 8px 15px rgba(0,0,0,0.1);
+            background: #e8f0fe;
+        }
+        
+        .game-icon {
+            font-size: 3rem;
+            margin-bottom: 15px;
+            color: var(--primary);
+        }
+        
+        .game-title {
+            font-weight: bold;
+            margin-bottom: 10px;
+            color: var(--primary);
+        }
+        
+        .game-description {
+            font-size: 0.9rem;
+            color: #666;
+        }
+        
+        /* Estilos para reflexión */
+        .reflection-container {
+            background: white;
+            border-radius: 20px;
+            padding: 30px;
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.08);
+            margin-bottom: 30px;
+            display: none;
+        }
+        
+        .reflection-container.active {
+            display: block;
+            animation: fadeIn 0.5s ease;
+        }
+        
+        .reflection-header {
+            text-align: center;
+            margin-bottom: 30px;
+        }
+        
+        .reflection-title {
+            color: var(--primary);
+            margin-bottom: 15px;
+        }
+        
+        .reflection-prompt {
+            font-size: 1.1rem;
+            margin-bottom: 25px;
+            background: var(--light);
+            padding: 20px;
+            border-radius: 10px;
+            border-left: 5px solid var(--primary);
+        }
+        
+        .reflection-input {
+            width: 100%;
+            min-height: 120px;
+            padding: 15px;
+            border: 1px solid #ddd;
+            border-radius: 10px;
+            font-size: 1rem;
+            resize: vertical;
+            margin-bottom: 20px;
+            transition: border-color 0.3s;
+        }
+        
+        .reflection-input:focus {
+            border-color: var(--primary);
+            outline: none;
+        }
+        
+        .shared-reflections {
+            margin-top: 30px;
+        }
+        
+        .reflection-card {
+            background: #f8f9fa;
+            border-radius: 10px;
+            padding: 15px;
+            margin-bottom: 15px;
+            border-left: 4px solid var(--primary);
+        }
+        
+        .reflection-author {
+            font-weight: bold;
+            color: var(--primary);
+            margin-bottom: 8px;
+        }
+        
+        .action-buttons {
+            display: flex;
+            gap: 15px;
+            justify-content: center;
+            margin-top: 30px;
+        }
+        
+        .external-link {
+            text-align: center;
+            margin: 40px 0;
+            padding: 25px;
+            background: white;
+            border-radius: 15px;
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
+        }
+        
+        .external-link h2 {
+            color: var(--primary);
+            margin-bottom: 15px;
+        }
+        
+        .external-link p {
+            margin-bottom: 20px;
+            max-width: 700px;
+            margin-left: auto;
+            margin-right: auto;
+        }
+        
+        footer {
+            text-align: center;
+            padding: 20px;
+            margin-top: 40px;
+            color: var(--secondary);
+            border-top: 1px solid #ddd;
+        }
+        
+        .completion-message {
+            text-align: center;
+            padding: 30px;
+            background: linear-gradient(135deg, #e3f7f0 0%, #c8f0e5 100%);
+            border-radius: 15px;
+            margin: 30px 0;
+            display: none;
+        }
+        
+        .completion-message.active {
+            display: block;
+            animation: fadeIn 0.5s ease;
+        }
+        
+        @media (max-width: 768px) {
+            .activities-grid {
+                grid-template-columns: 1fr;
+            }
+            
+            h1 {
+                font-size: 2.2rem;
+            }
+            
+            .subtitle {
+                font-size: 1.1rem;
+            }
+            
+            .options-container {
+                grid-template-columns: 1fr;
+            }
+            
+            .action-buttons {
+                flex-direction: column;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <header>
+            <a href="index.html" class="back-link">
+                <i class="fas fa-arrow-left"></i> Volver al Inicio
+            </a>
+            <h1>Ponte en mi Lugar</h1>
+            <p class="subtitle">Desarrollando empatía y convivencia escolar</p>
+            <div class="instructions">
+                <p><strong>La empatía es la capacidad de comprender y compartir los sentimientos de los demás.</strong> Esta actividad desarrolla tu habilidad para ponerte en el lugar del otro y resolver conflictos de manera pacífica, promoviendo una convivencia escolar basada en el respeto mutuo.</p>
+            </div>
+        </header>
+        
+        <div class="activities-grid">
+            <!-- Actividad 1: Simulación de Casos -->
+            <div class="activity-card">
+                <div class="card-header">
+                    <div class="card-icon">🧩</div>
+                    <h2 class="card-title">Simulación de Casos</h2>
+                </div>
+                <div class="card-body">
+                    <p class="card-description">Enfrenta situaciones escolares reales y toma decisiones que pongan a prueba tu empatía. Cada elección tiene consecuencias y recibirás retroalimentación inmediata.</p>
+                    
+                    <div class="card-features">
+                        <ul>
+                            <li>Casos basados en situaciones reales</li>
+                            <li>Múltiples finales según tus decisiones</li>
+                            <li>Retroalimentación sobre empatía</li>
+                            <li>Desarrollo de habilidades sociales</li>
+                        </ul>
+                    </div>
+                    
+                    <button class="btn btn-block" id="start-simulation">Comenzar simulación</button>
+                </div>
+            </div>
+            
+            <!-- Actividad 2: Juegos Interactivos -->
+            <div class="activity-card">
+                <div class="card-header">
+                    <div class="card-icon">🎮</div>
+                    <h2 class="card-title">Juegos de Convivencia</h2>
+                </div>
+                <div class="card-body">
+                    <p class="card-description">Actividades gamificadas para explorar situaciones de convivencia escolar. Aprende sobre empatía, respeto y resolución de conflictos de forma divertida.</p>
+                    
+                    <div class="card-features">
+                        <ul>
+                            <li>Actividades gamificadas</li>
+                            <li>Enfoque en resolución de conflictos</li>
+                            <li>Refuerzo de valores de convivencia</li>
+                            <li>Aprendizaje a través del juego</li>
+                        </ul>
+                    </div>
+                    
+                    <button class="btn btn-block" id="start-games">Jugar ahora</button>
+                </div>
+            </div>
+            
+            <!-- Actividad 3: Reflexión Colectiva -->
+            <div class="activity-card">
+                <div class="card-header">
+                    <div class="card-icon">💬</div>
+                    <h2 class="card-title">Reflexión Colectiva</h2>
+                </div>
+                <div class="card-body">
+                    <p class="card-description">Comparte tus experiencias, reflexiona sobre empatía y construye estrategias para mejorar la convivencia en tu escuela.</p>
+                    
+                    <div class="card-features">
+                        <ul>
+                            <li>Comparte tus experiencias</li>
+                            <li>Reflexiona sobre casos reales</li>
+                            <li>Construye estrategias en grupo</li>
+                            <li>Fomenta el diálogo respetuoso</li>
+                        </ul>
+                    </div>
+                    
+                    <button class="btn btn-block" id="start-reflection">Participar</button>
+                </div>
+            </div>
+        </div>
+        
+        <!-- Simulación de Casos -->
+        <div class="simulation-container" id="simulation-container">
+            <div class="progress-container">
+                <div class="progress-bar">
+                    <div class="progress" id="simulation-progress"></div>
+                </div>
+                <div class="progress-text">
+                    <span>Progreso: <span id="current-scenario">1</span>/3</span>
+                    <span>Puntuación de empatía: <span id="empathy-score">0</span>/100</span>
+                </div>
+            </div>
+            
+            <div class="scenario-header">
+                <div class="scenario-icon" id="scenario-icon">🤔</div>
+                <h2 class="scenario-title" id="scenario-title">Cargando escenario...</h2>
+            </div>
+            
+            <div class="scenario-description" id="scenario-description">
+                <!-- La descripción del escenario se cargará aquí -->
+            </div>
+            
+            <div class="options-container" id="options-container">
+                <!-- Las opciones se cargarán dinámicamente -->
+            </div>
+            
+            <div class="feedback-container" id="feedback-container">
+                <h3 class="feedback-title">Retroalimentación</h3>
+                <div class="feedback-content" id="feedback-content">
+                    <!-- La retroalimentación se cargará aquí -->
+                </div>
+            </div>
+            
+            <div class="action-buttons">
+                <button class="btn btn-outline" id="back-to-menu">Volver al menú</button>
+                <button class="btn" id="next-scenario" style="display: none;">Siguiente caso</button>
+            </div>
+        </div>
+        
+        <!-- Juegos Interactivos -->
+        <div class="games-container" id="games-container">
+            <h2 style="color: var(--primary); text-align: center; margin-bottom: 30px;">Juegos de Convivencia</h2>
+            <p style="text-align: center; margin-bottom: 30px;">Selecciona un juego para practicar tus habilidades de empatía y convivencia.</p>
+            
+            <div class="game-grid">
+                <div class="game-card" data-game="empathy-quiz">
+                    <div class="game-icon">❓</div>
+                    <div class="game-title">Quiz de Empatía</div>
+                    <div class="game-description">Pon a prueba tu comprensión de las emociones ajenas</div>
+                </div>
+                
+                <div class="game-card" data-game="conflict-resolution">
+                    <div class="game-icon">⚖️</div>
+                    <div class="game-title">Resolución de Conflictos</div>
+                    <div class="game-description">Aprende a mediar en situaciones difíciles</div>
+                </div>
+                
+                <div class="game-card" data-game="emotion-match">
+                    <div class="game-icon">🎭</div>
+                    <div class="game-title">Identifica Emociones</div>
+                    <div class="game-description">Relaciona expresiones con emociones</div>
+                </div>
+                
+                <div class="game-card" data-game="perspective-taking">
+                    <div class="game-icon">👀</div>
+                    <div class="game-title">Toma de Perspectiva</div>
+                    <div class="game-description">Mira las situaciones desde diferentes ángulos</div>
+                </div>
+            </div>
+            
+            <div id="game-content">
+                <!-- El contenido del juego seleccionado aparecerá aquí -->
+            </div>
+            
+            <div class="action-buttons">
+                <button class="btn btn-outline" id="back-to-menu-games">Volver al menú</button>
+            </div>
+        </div>
+        
+        <!-- Reflexión Colectiva -->
+        <div class="reflection-container" id="reflection-container">
+            <div class="reflection-header">
+                <h2 class="reflection-title">Reflexión Colectiva</h2>
+                <p>Comparte tus experiencias y reflexiones sobre empatía y convivencia escolar</p>
+            </div>
+            
+            <div class="reflection-prompt">
+                <p><strong>Pregunta para reflexionar:</strong> ¿Cómo puedes aplicar la empatía en tu vida escolar diaria para mejorar la convivencia con tus compañeros?</p>
+            </div>
+            
+            <textarea class="reflection-input" id="reflection-input" placeholder="Escribe tu reflexión aquí..."></textarea>
+            
+            <div class="action-buttons">
+                <button class="btn" id="submit-reflection">Compartir Reflexión</button>
+                <button class="btn btn-outline" id="back-to-menu-reflection">Volver al menú</button>
+            </div>
+            
+            <div class="shared-reflections" id="shared-reflections">
+                <h3 style="color: var(--primary); margin-bottom: 20px;">Reflexiones del grupo</h3>
+                <!-- Las reflexiones compartidas aparecerán aquí -->
+            </div>
+        </div>
+        
+        <div class="completion-message" id="completion-message">
+            <i class="fas fa-check-circle" style="font-size: 4rem; color: var(--success); margin-bottom: 20px;"></i>
+            <h2 style="color: var(--success); margin-bottom: 15px;">¡Actividad Completada!</h2>
+            <p style="margin-bottom: 20px; font-size: 1.1rem;">Has desarrollado tus habilidades de empatía y reflexionado sobre la convivencia escolar. Sigue practicando estas habilidades en tu día a día.</p>
+            <button class="btn" id="restart-activity">Realizar Otra Vez</button>
+        </div>
+        
+        <div class="external-link">
+            <h2>¿Quieres seguir desarrollando tu empatía?</h2>
+            <p>Visita nuestro sitio principal para acceder a más recursos sobre inteligencia emocional, habilidades sociales y convivencia escolar.</p>
+            <a href="https://cuidando-mi-mente-e2ubix2.gamma.site/" class="btn btn-accent" target="_blank">Visitar sitio principal</a>
+        </div>
+        
+        <footer>
+            <p>Actividades diseñadas para fomentar la empatía, el respeto y la convivencia escolar positiva</p>
+        </footer>
+    </div>
+
+    <script>
+        // Datos para la simulación
+        const scenarios = [
+            {
+                id: 1,
+                title: "El trabajo en grupo",
+                icon: "👥",
+                description: "Estás trabajando en un proyecto grupal. Uno de tus compañeros no ha hecho su parte del trabajo y el plazo de entrega es mañana. El resto del grupo está molesto y habla mal de él a sus espaldas.",
+                options: [
+                    {
+                        text: "Te unes a las críticas porque también estás frustrado",
+                        consequence: "Empatía: -20 - Esta acción genera más conflicto y no resuelve el problema",
+                        feedback: "Criticar a tus compañeros no ayuda a resolver la situación. La empatía implica entender que tal vez tu compañero está pasando por dificultades que no conoces."
+                    },
+                    {
+                        text: "Hablas directamente con tu compañero para entender qué sucede",
+                        consequence: "Empatía: +30 - Buscas entender antes de juzgar",
+                        feedback: "¡Excelente! Acercarte a tu compañero con curiosidad en lugar de juicio muestra empatía. Tal vez está teniendo dificultades personales o académicas que le impiden cumplir con su parte."
+                    },
+                    {
+                        text: "Haces su parte del trabajo para evitar conflictos",
+                        consequence: "Empatía: +10 - Ayudas pero no abordas la raíz del problema",
+                        feedback: "Es compasivo querer ayudar, pero hacer el trabajo por otros no les enseña responsabilidad. Un enfoque más empático sería ofrecer apoyo mientras mantienes expectativas claras."
+                    }
+                ]
+            },
+            {
+                id: 2,
+                title: "El nuevo estudiante",
+                icon: "🆕",
+                description: "Un nuevo estudiante se ha unido a tu clase. Parece tímido y no habla con nadie. Durante el recreo, siempre se sienta solo. Algunos compañeros se burlan de su forma de vestir.",
+                options: [
+                    {
+                        text: "Ignoras la situación para no llamar la atención",
+                        consequence: "Empatía: 0 - No empeoras las cosas pero tampoco ayudas",
+                        feedback: "Permanecer neutral cuando alguien es excluido o molestado indirectamente apoya el statu quo. La empatía activa requiere intervenir de manera respetuosa."
+                    },
+                    {
+                        text: "Te acercas al nuevo estudiante e intentas incluirlo",
+                        consequence: "Empatía: +40 - Reconoces su soledad y actúas",
+                        feedback: "¡Maravilloso! Incluir a quienes se sienten marginados es un acto profundo de empatía. Pequeños gestos como este pueden cambiar completamente la experiencia escolar de alguien."
+                    },
+                    {
+                        text: "Les dices a los que se burlan que paren, pero no interactúas con el nuevo",
+                        consequence: "Empatía: +20 - Defiendes pero no conectas",
+                        feedback: "Defender a alguien es importante, pero la verdadera empatía va más allá de detener el daño. Implica construir conexiones genuinas."
+                    }
+                ]
+            },
+            {
+                id: 3,
+                title: "El malentendido",
+                icon: "💬",
+                description: "Escuchas que un amigo está diciendo cosas negativas sobre ti. Te sientes herido y enojado. Otros amigos te animan a confrontarlo agresivamente o a dejar de hablarle.",
+                options: [
+                    {
+                        text: "Le dejas de hablar sin explicación",
+                        consequence: "Empatía: -10 - Cortas la comunicación sin entender",
+                        feedback: "Terminar una amistad sin conversación evita la posibilidad de entendimiento mutuo. La empatía implica dar a los demás la oportunidad de explicarse."
+                    },
+                    {
+                        text: "Lo confrontas calmadamente para entender su perspectiva",
+                        consequence: "Empatía: +35 - Buscas comprender antes de reaccionar",
+                        feedback: "¡Excelente enfoque! La comunicación abierta y calmada es clave para resolver malentendidos. Puede que haya un error de comunicación o que tu amigo esté pasando por algo difícil."
+                    },
+                    {
+                        text: "Le cuentas a otros lo que hizo para que se ponga de tu lado",
+                        consequence: "Empatía: -15 - Creas más división y chismes",
+                        feedback: "Involucrar a otros en el conflicto generalmente lo empeora. La empatía significa abordar los problemas directamente con la persona involucrada."
+                    }
+                ]
+            }
+        ];
+
+        // Datos para juegos
+        const games = {
+            'empathy-quiz': {
+                title: 'Quiz de Empatía',
+                questions: [
+                    {
+                        question: "Tu compañero llega a clase con los ojos rojos y no habla con nadie. ¿Cuál es la respuesta más empática?",
+                        options: [
+                            "Ignorarlo para no incomodarlo",
+                            "Preguntarle discretamente si está bien",
+                            "Contar a otros que parece que ha estado llorando",
+                            "Hacer bromas para animarlo"
+                        ],
+                        correct: 1
+                    },
+                    {
+                        question: "Un amigo saca una mala nota en un examen importante. ¿Qué harías?",
+                        options: [
+                            "Decirle que no es importante",
+                            "Contarle sobre la vez que tú sacaste una nota peor",
+                            "Preguntarle cómo se siente y ofrecer ayuda",
+                            "Criticar al profesor por el examen difícil"
+                        ],
+                        correct: 2
+                    }
+                ]
+            },
+            'conflict-resolution': {
+                title: 'Resolución de Conflictos',
+                description: 'Aprende estrategias para mediar en situaciones conflictivas de manera empática.'
+            },
+            'emotion-match': {
+                title: 'Identifica Emociones',
+                description: 'Relaciona expresiones faciales y situaciones con las emociones correspondientes.'
+            },
+            'perspective-taking': {
+                title: 'Toma de Perspectiva',
+                description: 'Practica ver las situaciones desde diferentes puntos de vista.'
+            }
+        };
+
+        // Estado de la aplicación
+        let currentScenario = 0;
+        let empathyScore = 0;
+        let selectedOption = null;
+        let sharedReflections = [];
+
+        // Elementos del DOM
+        const simulationContainer = document.getElementById('simulation-container');
+        const gamesContainer = document.getElementById('games-container');
+        const reflectionContainer = document.getElementById('reflection-container');
+        const completionMessage = document.getElementById('completion-message');
+
+        // Inicializar la actividad
+        function initActivity() {
+            setupEventListeners();
+            hideAllContainers();
+        }
+
+        // Configurar event listeners
+        function setupEventListeners() {
+            // Botones para iniciar actividades
+            document.getElementById('start-simulation').addEventListener('click', () => {
+                hideAllContainers();
+                simulationContainer.classList.add('active');
+                startSimulation();
+            });
+            
+            document.getElementById('start-games').addEventListener('click', () => {
+                hideAllContainers();
+                gamesContainer.classList.add('active');
+                showGameSelection();
+            });
+            
+            document.getElementById('start-reflection').addEventListener('click', () => {
+                hideAllContainers();
+                reflectionContainer.classList.add('active');
+                loadSharedReflections();
+            });
+            
+            // Botones para volver al menú
+            document.getElementById('back-to-menu').addEventListener('click', hideAllContainers);
+            document.getElementById('back-to-menu-games').addEventListener('click', hideAllContainers);
+            document.getElementById('back-to-menu-reflection').addEventListener('click', hideAllContainers);
+            
+            // Botones de la simulación
+            document.getElementById('next-scenario').addEventListener('click', nextScenario);
+            
+            // Reflexión
+            document.getElementById('submit-reflection').addEventListener('click', submitReflection);
+            
+            // Reiniciar actividad
+            document.getElementById('restart-activity').addEventListener('click', restartActivity);
+            
+            // Juegos
+            document.querySelectorAll('.game-card').forEach(card => {
+                card.addEventListener('click', function() {
+                    const gameId = this.getAttribute('data-game');
+                    startGame(gameId);
+                });
+            });
+        }
+
+        // Ocultar todos los contenedores
+        function hideAllContainers() {
+            simulationContainer.classList.remove('active');
+            gamesContainer.classList.remove('active');
+            reflectionContainer.classList.remove('active');
+            completionMessage.classList.remove('active');
+        }
+
+        // Iniciar simulación
+        function startSimulation() {
+            currentScenario = 0;
+            empathyScore = 0;
+            updateEmpathyScore();
+            loadScenario(currentScenario);
+        }
+
+        // Cargar escenario
+        function loadScenario(index) {
+            if (index >= scenarios.length) {
+                // Completar simulación
+                simulationContainer.classList.remove('active');
+                completionMessage.classList.add('active');
+                return;
+            }
+            
+            const scenario = scenarios[index];
+            document.getElementById('scenario-icon').textContent = scenario.icon;
+            document.getElementById('scenario-title').textContent = scenario.title;
+            document.getElementById('scenario-description').textContent = scenario.description;
+            document.getElementById('current-scenario').textContent = index + 1;
+            
+            // Actualizar progreso
+            const progress = ((index + 1) / scenarios.length) * 100;
+            document.getElementById('simulation-progress').style.width = `${progress}%`;
+            
+            // Cargar opciones
+            const optionsContainer = document.getElementById('options-container');
+            optionsContainer.innerHTML = '';
+            
+            scenario.options.forEach((option, i) => {
+                const optionCard = document.createElement('div');
+                optionCard.className = 'option-card';
+                optionCard.innerHTML = `
+                    <div class="option-icon">${i === 0 ? '😠' : i === 1 ? '😊' : '😔'}</div>
+                    <div class="option-text">${option.text}</div>
+                    <div class="option-consequence">${option.consequence}</div>
+                `;
+                optionCard.addEventListener('click', () => selectOption(option, i));
+                optionsContainer.appendChild(optionCard);
+            });
+            
+            // Ocultar feedback y botón siguiente
+            document.getElementById('feedback-container').classList.remove('active');
+            document.getElementById('next-scenario').style.display = 'none';
+            selectedOption = null;
+        }
+
+        // Seleccionar opción
+        function selectOption(option, index) {
+            // Remover selección anterior
+            document.querySelectorAll('.option-card').forEach(card => {
+                card.classList.remove('selected');
+            });
+            
+            // Marcar opción seleccionada
+            document.querySelectorAll('.option-card')[index].classList.add('selected');
+            
+            // Mostrar feedback
+            const feedbackContainer = document.getElementById('feedback-container');
+            const feedbackContent = document.getElementById('feedback-content');
+            
+            feedbackContent.textContent = option.feedback;
+            feedbackContainer.classList.add('active');
+            
+            // Actualizar puntuación
+            const scoreChange = parseInt(option.consequence.split(': ')[1].split(' ')[0]);
+            empathyScore += scoreChange;
+            updateEmpathyScore();
+            
+            // Mostrar botón siguiente
+            document.getElementById('next-scenario').style.display = 'block';
+            selectedOption = option;
+        }
+
+        // Siguiente escenario
+        function nextScenario() {
+            currentScenario++;
+            loadScenario(currentScenario);
+        }
+
+        // Actualizar puntuación de empatía
+        function updateEmpathyScore() {
+            document.getElementById('empathy-score').textContent = Math.max(0, empathyScore);
+        }
+
+        // Mostrar selección de juegos
+        function showGameSelection() {
+            document.getElementById('game-content').innerHTML = `
+                <p style="text-align: center; color: #666; margin-top: 20px;">Selecciona un juego de la cuadrícula para comenzar</p>
+            `;
+        }
+
+        // Iniciar juego
+        function startGame(gameId) {
+            const game = games[gameId];
+            let gameHTML = '';
+            
+            if (gameId === 'empathy-quiz') {
+                gameHTML = `
+                    <h3 style="color: var(--primary); text-align: center; margin-bottom: 20px;">${game.title}</h3>
+                    <div id="quiz-questions">
+                        <!-- Las preguntas del quiz se cargarán aquí -->
+                    </div>
+                `;
+                
+                // Cargar primera pregunta
+                loadQuizQuestion(0);
+            } else {
+                gameHTML = `
+                    <h3 style="color: var(--primary); text-align: center; margin-bottom: 20px;">${game.title}</h3>
+                    <p style="text-align: center; margin-bottom: 20px;">${game.description}</p>
+                    <div style="text-align: center; padding: 40px; background: #f8f9fa; border-radius: 10px;">
+                        <p style="color: #666; margin-bottom: 20px;">Este juego simula una experiencia interactiva sobre ${game.title.toLowerCase()}.</p>
+                        <button class="btn" onclick="showGameSelection()">Volver a la selección de juegos</button>
+                    </div>
+                `;
+            }
+            
+            document.getElementById('game-content').innerHTML = gameHTML;
+        }
+
+        // Cargar pregunta del quiz
+        function loadQuizQuestion(questionIndex) {
+            const game = games['empathy-quiz'];
+            if (questionIndex >= game.questions.length) {
+                document.getElementById('quiz-questions').innerHTML = `
+                    <div style="text-align: center; padding: 30px; background: #e8f5e8; border-radius: 10px;">
+                        <h4 style="color: var(--success); margin-bottom: 15px;">¡Quiz Completado!</h4>
+                        <p>Has practicado tu capacidad de identificar respuestas empáticas.</p>
+                        <button class="btn" onclick="showGameSelection()" style="margin-top: 15px;">Volver a juegos</button>
+                    </div>
+                `;
+                return;
+            }
+            
+            const question = game.questions[questionIndex];
+            let optionsHTML = '';
+            
+            question.options.forEach((option, index) => {
+                optionsHTML += `
+                    <div class="option-card" onclick="checkQuizAnswer(${questionIndex}, ${index})">
+                        <div class="option-text">${option}</div>
+                    </div>
+                `;
+            });
+            
+            document.getElementById('quiz-questions').innerHTML = `
+                <div style="margin-bottom: 25px;">
+                    <p style="font-weight: bold; margin-bottom: 15px;">${questionIndex + 1}. ${question.question}</p>
+                    <div class="options-container">
+                        ${optionsHTML}
+                    </div>
+                </div>
+            `;
+        }
+
+        // Verificar respuesta del quiz
+        function checkQuizAnswer(questionIndex, selectedIndex) {
+            const game = games['empathy-quiz'];
+            const question = game.questions[questionIndex];
+            const isCorrect = selectedIndex === question.correct;
+            
+            let feedback = '';
+            if (isCorrect) {
+                feedback = '<div style="color: var(--success); font-weight: bold; margin: 15px 0;">¡Correcto! Esta es la respuesta más empática.</div>';
+            } else {
+                feedback = '<div style="color: var(--warning); font-weight: bold; margin: 15px 0;">Puedes considerar un enfoque más empático.</div>';
+            }
+            
+            document.getElementById('quiz-questions').innerHTML += `
+                ${feedback}
+                <button class="btn" onclick="loadQuizQuestion(${questionIndex + 1})" style="margin-top: 10px;">Siguiente Pregunta</button>
+            `;
+        }
+
+        // Cargar reflexiones compartidas
+        function loadSharedReflections() {
+            const container = document.getElementById('shared-reflections');
+            
+            if (sharedReflections.length === 0) {
+                container.innerHTML = `
+                    <div style="text-align: center; padding: 20px; background: #f8f9fa; border-radius: 10px;">
+                        <p style="color: #666;">Aún no hay reflexiones compartidas. ¡Sé el primero en compartir!</p>
+                    </div>
+                `;
+                return;
+            }
+            
+            let reflectionsHTML = '';
+            sharedReflections.forEach(reflection => {
+                reflectionsHTML += `
+                    <div class="reflection-card">
+                        <div class="reflection-author">${reflection.author}</div>
+                        <div class="reflection-content">${reflection.content}</div>
+                    </div>
+                `;
+            });
+            
+            container.innerHTML = reflectionsHTML;
+        }
+
+        // Enviar reflexión
+        function submitReflection() {
+            const reflectionInput = document.getElementById('reflection-input');
+            const content = reflectionInput.value.trim();
+            
+            if (!content) {
+                alert('Por favor, escribe tu reflexión antes de compartirla.');
+                return;
+            }
+            
+            // En una implementación real, aquí se enviaría a un servidor
+            // Por ahora, simulamos una respuesta
+            const newReflection = {
+                author: 'Tú',
+                content: content
+            };
+            
+            sharedReflections.unshift(newReflection);
+            reflectionInput.value = '';
+            loadSharedReflections();
+            
+            alert('¡Tu reflexión ha sido compartida! Gracias por contribuir a la reflexión colectiva.');
+        }
+
+        // Reiniciar actividad
+        function restartActivity() {
+            hideAllContainers();
+            sharedReflections = [];
+            empathyScore = 0;
+        }
+
+        // Inicializar cuando se carga la página
+        window.onload = initActivity;
+    </script>
+</body>
+</html>
