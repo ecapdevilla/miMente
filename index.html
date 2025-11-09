@@ -1,0 +1,826 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Cuidando mi Mente - Bienestar Emocional</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+        }
+        
+        :root {
+            --primary: #4A6FA5;
+            --secondary: #6B8CC0;
+            --accent: #FF9E6D;
+            --light: #F0F4F8;
+            --dark: #333;
+            --success: #06D6A0;
+            --warning: #EF476F;
+            --info: #4ECDC4;
+            --emotion: #9C27B0;
+            --stress: #FF9800;
+            --esteem: #4CAF50;
+            --empathy: #2196F3;
+        }
+        
+        body {
+            background: linear-gradient(135deg, #F0F4F8 0%, #E1E8F0 100%);
+            min-height: 100vh;
+            color: var(--dark);
+            line-height: 1.6;
+        }
+        
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 20px;
+        }
+        
+        header {
+            text-align: center;
+            padding: 60px 20px;
+            background: linear-gradient(135deg, var(--primary) 0%, var(--secondary) 100%);
+            border-radius: 20px;
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.15);
+            margin-bottom: 40px;
+            color: white;
+            position: relative;
+            overflow: hidden;
+        }
+        
+        header::before {
+            content: "";
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background: url('data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 100 100" preserveAspectRatio="none"><path d="M0,0 L100,0 L100,100 Z" fill="rgba(255,255,255,0.1)"/></svg>');
+            background-size: cover;
+        }
+        
+        h1 {
+            font-size: 3.5rem;
+            margin-bottom: 15px;
+            text-shadow: 2px 2px 4px rgba(0,0,0,0.2);
+            position: relative;
+        }
+        
+        .subtitle {
+            font-size: 1.5rem;
+            opacity: 0.9;
+            margin-bottom: 25px;
+            position: relative;
+        }
+        
+        .intro-text {
+            max-width: 800px;
+            margin: 0 auto;
+            font-size: 1.1rem;
+            position: relative;
+        }
+        
+        .section {
+            background: white;
+            border-radius: 20px;
+            padding: 40px;
+            margin-bottom: 40px;
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.08);
+        }
+        
+        .section-title {
+            color: var(--primary);
+            margin-bottom: 25px;
+            font-size: 2rem;
+            text-align: center;
+        }
+        
+        .objectives-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 25px;
+            margin-bottom: 30px;
+        }
+        
+        .objective-card {
+            background: var(--light);
+            border-radius: 15px;
+            padding: 25px;
+            text-align: center;
+            transition: transform 0.3s;
+        }
+        
+        .objective-card:hover {
+            transform: translateY(-5px);
+        }
+        
+        .objective-icon {
+            font-size: 3rem;
+            margin-bottom: 15px;
+            color: var(--primary);
+        }
+        
+        .topics-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+            gap: 25px;
+        }
+        
+        .topic-card {
+            background: var(--light);
+            border-radius: 15px;
+            padding: 30px;
+            text-align: center;
+            transition: all 0.3s;
+            border-left: 5px solid var(--primary);
+        }
+        
+        .topic-card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 8px 20px rgba(0,0,0,0.1);
+        }
+        
+        .topic-number {
+            background: var(--primary);
+            color: white;
+            width: 50px;
+            height: 50px;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            margin: 0 auto 15px;
+            font-weight: bold;
+            font-size: 1.2rem;
+        }
+        
+        .topic-title {
+            color: var(--primary);
+            margin-bottom: 15px;
+            font-size: 1.3rem;
+        }
+        
+        .reflection-questions {
+            background: var(--light);
+            border-radius: 15px;
+            padding: 30px;
+            margin-top: 20px;
+        }
+        
+        .question {
+            margin-bottom: 20px;
+            padding-bottom: 20px;
+            border-bottom: 1px solid #ddd;
+        }
+        
+        .question:last-child {
+            border-bottom: none;
+            margin-bottom: 0;
+            padding-bottom: 0;
+        }
+        
+        .theme-content {
+            display: grid;
+            grid-template-columns: 2fr 1fr;
+            gap: 30px;
+            margin-bottom: 30px;
+        }
+        
+        @media (max-width: 768px) {
+            .theme-content {
+                grid-template-columns: 1fr;
+            }
+        }
+        
+        .theme-description {
+            background: var(--light);
+            padding: 25px;
+            border-radius: 15px;
+        }
+        
+        .theme-tools {
+            background: white;
+            border: 2px solid var(--primary);
+            border-radius: 15px;
+            padding: 25px;
+        }
+        
+        .tools-title {
+            color: var(--primary);
+            margin-bottom: 15px;
+            font-size: 1.2rem;
+        }
+        
+        .btn {
+            display: inline-block;
+            padding: 12px 25px;
+            background: linear-gradient(135deg, var(--primary) 0%, var(--secondary) 100%);
+            color: white;
+            text-decoration: none;
+            border-radius: 10px;
+            font-weight: bold;
+            text-align: center;
+            transition: all 0.3s;
+            border: none;
+            cursor: pointer;
+            font-size: 1rem;
+            box-shadow: 0 5px 15px rgba(74, 111, 165, 0.3);
+        }
+        
+        .btn:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 8px 20px rgba(74, 111, 165, 0.4);
+        }
+        
+        .btn-accent {
+            background: linear-gradient(135deg, var(--accent) 0%, #ff8a4d 100%);
+            color: var(--dark);
+        }
+        
+        .btn-emotion {
+            background: linear-gradient(135deg, var(--emotion) 0%, #BA68C8 100%);
+            color: white;
+        }
+        
+        .btn-stress {
+            background: linear-gradient(135deg, var(--stress) 0%, #FFB74D 100%);
+            color: var(--dark);
+        }
+        
+        .btn-esteem {
+            background: linear-gradient(135deg, var(--esteem) 0%, #81C784 100%);
+            color: white;
+        }
+        
+        .btn-empathy {
+            background: linear-gradient(135deg, var(--empathy) 0%, #64B5F6 100%);
+            color: white;
+        }
+        
+        .emoteca-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 25px;
+        }
+        
+        .video-card {
+            background: var(--light);
+            border-radius: 15px;
+            padding: 25px;
+            text-align: center;
+            transition: transform 0.3s;
+        }
+        
+        .video-card:hover {
+            transform: translateY(-5px);
+        }
+        
+        .video-icon {
+            font-size: 3rem;
+            margin-bottom: 15px;
+            color: var(--primary);
+        }
+        
+        footer {
+            text-align: center;
+            padding: 30px;
+            margin-top: 50px;
+            color: var(--secondary);
+            border-top: 1px solid #ddd;
+        }
+        
+        .highlight {
+            background: linear-gradient(135deg, #e3f7f0 0%, #c8f0e5 100%);
+            padding: 25px;
+            border-radius: 15px;
+            margin: 25px 0;
+            border-left: 5px solid var(--success);
+        }
+        
+        .activity-section {
+            background: white;
+            border-radius: 15px;
+            padding: 25px;
+            margin: 20px 0;
+            border: 2px solid var(--light);
+        }
+        
+        .video-container {
+            position: relative;
+            width: 100%;
+            height: 0;
+            padding-bottom: 56.25%;
+            margin: 20px 0;
+            border-radius: 10px;
+            overflow: hidden;
+            box-shadow: 0 5px 15px rgba(0,0,0,0.1);
+        }
+        
+        .video-container iframe {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            border: none;
+        }
+        
+        .theme-video {
+            margin: 25px 0;
+        }
+        
+        .theme-quote {
+            background: linear-gradient(135deg, #fff3e0 0%, #ffe0b2 100%);
+            padding: 20px;
+            border-radius: 10px;
+            margin: 20px 0;
+            border-left: 5px solid var(--stress);
+            font-style: italic;
+        }
+        
+        .activities-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 20px;
+            margin: 25px 0;
+        }
+        
+        .activity-mini-card {
+            background: var(--light);
+            border-radius: 15px;
+            padding: 20px;
+            text-align: center;
+            transition: all 0.3s;
+            border-top: 5px solid var(--primary);
+        }
+        
+        .activity-mini-card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 8px 15px rgba(0,0,0,0.1);
+        }
+        
+        .activity-icon {
+            font-size: 2.5rem;
+            margin-bottom: 15px;
+        }
+        
+        .activity-mini-card.emotion-card {
+            border-top-color: var(--emotion);
+        }
+        
+        .activity-mini-card.stress-card {
+            border-top-color: var(--stress);
+        }
+        
+        .activity-mini-card.esteem-card {
+            border-top-color: var(--esteem);
+        }
+        
+        .activity-mini-card.empathy-card {
+            border-top-color: var(--empathy);
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <header>
+            <h1>Cuidando mi Mente</h1>
+            <p class="subtitle">Aprendizaje digital y bienestar emocional</p>
+            <div class="intro-text">
+                <p><strong>Bienvenidos a tu espacio de crecimiento</strong></p>
+                <p>Este Objeto Virtual de Aprendizaje (OVA) es un recorrido formativo diseñado especialmente para ti, donde exploraremos juntos la salud mental, el bienestar emocional y el aprendizaje digital.</p>
+            </div>
+        </header>
+        
+        <!-- Introducción -->
+        <div class="section">
+            <p>A través de actividades interactivas, dinámicas de juego y colaboración virtual, descubrirás herramientas prácticas para cuidar tu mente, comprender tus emociones y fortalecer tu bienestar. Este es un espacio de reflexión, empatía y autoconocimiento que te acompañará en tu crecimiento personal y académico.</p>
+            
+            <div class="highlight">
+                <p><strong>Recuerda:</strong> Cuidar tu salud mental es tan importante como cuidar tu cuerpo. Aquí aprenderás que está bien sentir, que no estás solo y que siempre hay estrategias para sentirte mejor.</p>
+            </div>
+        </div>
+        
+        <!-- Objetivos de aprendizaje -->
+        <div class="section">
+            <h2 class="section-title">Objetivos de aprendizaje</h2>
+            <p>Al finalizar este recorrido formativo, habrás desarrollado habilidades fundamentales para tu bienestar emocional:</p>
+            
+            <div class="objectives-grid">
+                <div class="objective-card">
+                    <div class="objective-icon">💡</div>
+                    <h3>Reconocer la importancia</h3>
+                    <p>Comprenderás por qué tu salud mental y emocional son pilares esenciales en tu vida escolar y personal.</p>
+                </div>
+                
+                <div class="objective-card">
+                    <div class="objective-icon">🤝</div>
+                    <h3>Desarrollar habilidades socioemocionales</h3>
+                    <p>Fortalecerás competencias para relacionarte mejor contigo mismo y con los demás mediante actividades digitales colaborativas.</p>
+                </div>
+                
+                <div class="objective-card">
+                    <div class="objective-icon">❤️</div>
+                    <h3>Fomentar empatía y autocuidado</h3>
+                    <p>Aprenderás a comunicarte asertivamente, ponerte en el lugar del otro y cuidar de tu bienestar emocional con herramientas interactivas.</p>
+                </div>
+                
+                <div class="objective-card">
+                    <div class="objective-icon">🎮</div>
+                    <h3>Aplicar gamificación</h3>
+                    <p>Utilizarás principios de cibercultura y juego digital para promover la reflexión y el bienestar en entornos virtuales.</p>
+                </div>
+            </div>
+        </div>
+        
+        <!-- Mapa de temas -->
+        <div class="section">
+            <h2 class="section-title">Mapa de temas</h2>
+            <p>Nuestro recorrido está organizado en cuatro temas fundamentales que te guiarán hacia un mayor bienestar emocional:</p>
+            
+            <div class="topics-grid">
+                <div class="topic-card">
+                    <div class="topic-number">1</div>
+                    <h3 class="topic-title">Conociendo mis emociones</h3>
+                    <p>Identifica, nombra y comprende lo que sientes cada día</p>
+                    <a href="emociones.html" class="btn btn-emotion" style="margin-top: 15px;">Explorar Actividad</a>
+                </div>
+                
+                <div class="topic-card">
+                    <div class="topic-number">2</div>
+                    <h3 class="topic-title">Estrés y presión académica</h3>
+                    <p>Aprende a manejar la ansiedad escolar de forma saludable</p>
+                    <a href="estres.html" class="btn btn-stress" style="margin-top: 15px;">Explorar Actividad</a>
+                </div>
+                
+                <div class="topic-card">
+                    <div class="topic-number">3</div>
+                    <h3 class="topic-title">Autoestima y autoconcepto</h3>
+                    <p>Descubre tu valor y fortalece la imagen positiva de ti mismo</p>
+                    <a href="autoestima.html" class="btn btn-esteem" style="margin-top: 15px;">Explorar Actividad</a>
+                </div>
+                
+                <div class="topic-card">
+                    <div class="topic-number">4</div>
+                    <h3 class="topic-title">Empatía y convivencia</h3>
+                    <p>Construye relaciones saludables basadas en el respeto mutuo</p>
+                    <a href="empatia.html" class="btn btn-empathy" style="margin-top: 15px;">Explorar Actividad</a>
+                </div>
+            </div>
+        </div>
+        
+        <!-- Presaberes -->
+        <div class="section">
+            <h2 class="section-title">Presaberes</h2>
+            <p>Antes de comenzar este recorrido, tomémonos un momento para la reflexión personal. No hay respuestas correctas o incorrectas, solo tu verdad:</p>
+            
+            <div class="reflection-questions">
+                <div class="question">
+                    <h3>¿Cómo te sientes emocionalmente en el colegio?</h3>
+                    <p>Piensa en las emociones que experimentas con más frecuencia durante tus días escolares.</p>
+                </div>
+                
+                <div class="question">
+                    <h3>¿Qué haces cuando te sientes estresado o triste?</h3>
+                    <p>Identifica las estrategias que actualmente utilizas para enfrentar momentos difíciles.</p>
+                </div>
+                
+                <div class="question">
+                    <h3>¿Qué significa para ti cuidar tu salud mental?</h3>
+                    <p>Reflexiona sobre tu concepto personal del bienestar emocional y su importancia.</p>
+                </div>
+            </div>
+        </div>
+        
+        <!-- Desarrollo Temático -->
+        <div class="section">
+            <h2 class="section-title">Desarrollo Temático</h2>
+            <p>A continuación exploraremos en profundidad los cuatro temas que componen este OVA. Cada uno incluye actividades interactivas, herramientas digitales específicas y objetivos pedagógicos claros para tu aprendizaje.</p>
+            
+            <!-- Tema 1 -->
+            <div class="activity-section">
+                <h3 style="color: var(--emotion); margin-bottom: 20px;">Tema 1: Conociendo mis emociones</h3>
+                
+                <div class="theme-content">
+                    <div class="theme-description">
+                        <h4>Descripción</h4>
+                        <p>En esta actividad aprenderás a identificar, nombrar y comprender tus emociones mediante un recorrido digital interactivo. Las emociones son señales importantes que nos ayudan a entender cómo nos afecta el mundo que nos rodea.</p>
+                        
+                        <div class="highlight">
+                            <h4>Actividad: "El mapa de mis emociones"</h4>
+                            <p>Explorarás una infografía interactiva donde cada emoción tiene su propio espacio. Realizarás un quiz digital que te ayudará a relacionar emociones con situaciones cotidianas de tu vida.</p>
+                        </div>
+                        
+                        <div class="activities-grid">
+                            <div class="activity-mini-card emotion-card">
+                                <div class="activity-icon">🗺️</div>
+                                <h4>Mapa Emocional</h4>
+                                <p>Explora tus emociones en un viaje interactivo</p>
+                            </div>
+                            <div class="activity-mini-card emotion-card">
+                                <div class="activity-icon">❓</div>
+                                <h4>Quiz Emocional</h4>
+                                <p>Pon a prueba tu conocimiento sobre emociones</p>
+                            </div>
+                            <div class="activity-mini-card emotion-card">
+                                <div class="activity-icon">📊</div>
+                                <h4>Diario Emocional</h4>
+                                <p>Registra y analiza tus emociones diarias</p>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <div class="theme-tools">
+                        <h4 class="tools-title">Herramienta digital</h4>
+                        <p><strong>Genially</strong></p>
+                        <p>Plantilla interactiva tipo "mapa emocional" donde cada clic revela una emoción, su descripción y estrategias prácticas para gestionarla.</p>
+                        <p><strong>Padlet</strong></p>
+                        <p>Mural colaborativo donde compartirás con tus compañeros frases que representen cómo te sientes hoy.</p>
+                        
+                        <div style="text-align: center; margin-top: 20px;">
+                            <a href="emociones.html" class="btn btn-emotion">Ir a Actividad Completa</a>
+                        </div>
+                    </div>
+                </div>
+             <div class="theme-video">
+  <div class="theme-video">
+    <h4>Video: Comprendiendo las emociones</h4>
+    <div class="video-container">
+        <iframe src="https://www.youtube.com/embed/CCuc54qZPEA?rel=0&playsinline=1" 
+                allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" 
+                allowfullscreen>
+        </iframe>
+    </div>
+    <div class="theme-quote">
+        <p>Las emociones no se controlan… se comprenden.</p>
+        <p><small>💡 Haz clic en el video para reproducirlo</small></p>
+    </div>
+</div>
+                    
+                
+                <div class="highlight">
+                    <p><strong>Objetivo pedagógico:</strong> Promover el autoconocimiento emocional como base fundamental para la regulación emocional y la salud mental integral.</p>
+                </div>
+            </div>
+            
+            <!-- Tema 2 -->
+            <div class="activity-section">
+                <h3 style="color: var(--stress); margin-bottom: 20px;">Tema 2: Estrés y manejo de la presión académica</h3>
+                
+                <div class="theme-content">
+                    <div class="theme-description">
+                        <h4>Descripción</h4>
+                        <p>Reconoce las causas del estrés escolar y aprende estrategias efectivas para enfrentarlo. La presión académica es real, pero puedes manejarla de forma saludable.</p>
+                        
+                        <div class="highlight">
+                            <h4>Actividad: "Desafío antiestrés"</h4>
+                            <p>Una secuencia gamificada con retos cortos sobre situaciones escolares que generan presión: exámenes, plazos de entrega, múltiples tareas simultáneas.</p>
+                        </div>
+                        
+                        <div class="activities-grid">
+                            <div class="activity-mini-card stress-card">
+                                <div class="activity-icon">🎯</div>
+                                <h4>Desafío Anti-Estrés</h4>
+                                <p>Enfrenta situaciones escolares estresantes</p>
+                            </div>
+                            <div class="activity-mini-card stress-card">
+                                <div class="activity-icon">⏱️</div>
+                                <h4>Gestión del Tiempo</h4>
+                                <p>Aprende a organizar tus tareas eficientemente</p>
+                            </div>
+                            <div class="activity-mini-card stress-card">
+                                <div class="activity-icon">🧘</div>
+                                <h4>Técnicas de Relajación</h4>
+                                <p>Ejercicios prácticos para calmar la ansiedad</p>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <div class="theme-tools">
+                        <h4 class="tools-title">Herramienta</h4>
+                        <p><strong>Educaplay</strong></p>
+                        <p>Juego tipo quiz de decisiones con puntuación inmediata. Cada pregunta ofrece tres opciones de acción y explica cuál es la más saludable para tu bienestar.</p>
+                        
+                        <div style="text-align: center; margin-top: 20px;">
+                            <a href="estres.html" class="btn btn-stress">Ir a Actividad Completa</a>
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="theme-video">
+                    <h4>Video: Entendiendo el estrés académico</h4>
+                    <div class="video-container">
+                        <iframe src="https://www.youtube.com/embed/PdwEVaa-xCw?rel=0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
+                    </div>
+                    <div class="theme-quote">
+                        <p>El estrés aparece cuando creemos que no alcanzamos las expectativas: las nuestras y/o las de otros. Aprender a reconocer tus límites, priorizar lo importante y cuidar de ti es una forma de inteligencia emocional. No se trata de rendirse, sino de encontrar equilibrio entre el esfuerzo y el descanso. A veces, detenerte también es avanzar.</p>
+                    </div>
+                </div>
+                
+                <div class="highlight">
+                    <p><strong>Objetivo pedagógico:</strong> Fomentar la autorregulación emocional, la toma de decisiones asertivas y la gestión positiva del estrés académico.</p>
+                </div>
+            </div>
+            
+            <!-- Tema 3 -->
+            <div class="activity-section">
+                <h3 style="color: var(--esteem); margin-bottom: 20px;">Tema 3: Autoestima y autoconcepto</h3>
+                
+                <div class="theme-content">
+                    <div class="theme-description">
+                        <h4>Descripción</h4>
+                        <p>Esta actividad impulsa la reflexión profunda sobre tu percepción personal y la importancia de valorarte a ti mismo tal como eres. Tu autoestima es el cimiento de tu bienestar emocional.</p>
+                        
+                        <div class="highlight">
+                            <h4>Actividad: "Mírate con otros ojos"</h4>
+                            <p>Un recorrido digital donde elegirás frases, imágenes y afirmaciones positivas que te representen. Al final, crearás una "nube de palabras" visual con todo aquello que más valoras de ti mismo.</p>
+                        </div>
+                        
+                        <div class="activities-grid">
+                            <div class="activity-mini-card esteem-card">
+                                <div class="activity-icon">👁️</div>
+                                <h4>Mírate con Otros Ojos</h4>
+                                <p>Descubre tu valor a través de afirmaciones positivas</p>
+                            </div>
+                            <div class="activity-mini-card esteem-card">
+                                <div class="activity-icon">💭</div>
+                                <h4>Nube de Autoestima</h4>
+                                <p>Crea tu nube personal de cualidades positivas</p>
+                            </div>
+                            <div class="activity-mini-card esteem-card">
+                                <div class="activity-icon">📝</div>
+                                <h4>Diario de Logros</h4>
+                                <p>Registra tus éxitos y cualidades positivas</p>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <div class="theme-tools">
+                        <h4 class="tools-title">Herramientas digitales</h4>
+                        <p><strong>Mentimeter</strong></p>
+                        <p>Plataforma interactiva para crear nubes de palabras en tiempo real</p>
+                        <p><strong>WordArt.com</strong></p>
+                        <p>Herramienta gratuita para generar visualizaciones colaborativas impactantes</p>
+                        
+                        <div style="text-align: center; margin-top: 20px;">
+                            <a href="autoestima.html" class="btn btn-esteem">Ir a Actividad Completa</a>
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="theme-video">
+                    <h4>Video: Fortaleciendo la autoestima</h4>
+                    <div class="video-container">
+                        <iframe src="https://www.youtube.com/embed/Dagr32QazRk?rel=0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
+                    </div>
+                    <div class="theme-quote">
+                        <p>La forma en que te miras a ti mismo puede cambiar por completo cómo enfrentas la vida. No necesitas ser perfecto para sentirte valioso: basta con reconocer tu esfuerzo, tus avances y lo que te hace único. Compararte con otros te resta energía; compararte con tu propio crecimiento te impulsa. Tu voz interior puede ser tu mejor aliada si aprendes a hablarte con cariño.</p>
+                    </div>
+                </div>
+                
+                <div class="highlight">
+                    <p><strong>Objetivo pedagógico:</strong> Fortalecer la autoestima y la autoimagen positiva, favoreciendo la confianza personal y la expresión emocional auténtica.</p>
+                </div>
+            </div>
+            
+            <!-- Tema 4 -->
+            <div class="activity-section">
+                <h3 style="color: var(--empathy); margin-bottom: 20px;">Tema 4: Empatía y convivencia escolar</h3>
+                
+                <div class="theme-content">
+                    <div class="theme-description">
+                        <p>La empatía es la capacidad de comprender y compartir los sentimientos de los demás. Esta actividad desarrolla tu habilidad para ponerte en el lugar del otro y resolver conflictos de manera pacífica, promoviendo una convivencia escolar basada en el respeto mutuo.</p>
+                        
+                        <div class="highlight">
+                            <h4>Actividad: "Ponte en mi lugar"</h4>
+                            <p>Simulación interactiva de casos reales donde deberás decidir cómo actuar frente a diferentes conflictos escolares. Cada decisión tiene consecuencias y recibirás retroalimentación inmediata sobre cómo tus acciones afectan a los demás.</p>
+                        </div>
+                        
+                        <div class="activities-grid">
+                            <div class="activity-mini-card empathy-card">
+                                <div class="activity-icon">🧩</div>
+                                <h4>Simulación de Casos</h4>
+                                <p>Enfrenta situaciones escolares reales</p>
+                            </div>
+                            <div class="activity-mini-card empathy-card">
+                                <div class="activity-icon">🎮</div>
+                                <h4>Juegos de Convivencia</h4>
+                                <p>Aprende empatía mediante actividades gamificadas</p>
+                            </div>
+                            <div class="activity-mini-card empathy-card">
+                                <div class="activity-icon">💬</div>
+                                <h4>Reflexión Colectiva</h4>
+                                <p>Comparte experiencias y construye estrategias</p>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <div class="theme-tools">
+                        <h4 class="tools-title">Herramientas digitales</h4>
+                        <p><strong>Simulación de Casos</strong> - Enfrenta situaciones escolares reales y toma decisiones que pongan a prueba tu empatía</p>
+                        <p><strong>Juegos de Convivencia</strong> - Actividades gamificadas para explorar situaciones de convivencia escolar</p>
+                        <p><strong>Reflexión Colectiva</strong> - Comparte experiencias y construye estrategias para mejorar la convivencia</p>
+                        
+                        <div style="text-align: center; margin-top: 20px;">
+                            <a href="empatia.html" class="btn btn-empathy">Ir a Actividad Completa</a>
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="theme-video">
+                    <h4>Video: Desarrollando la empatía</h4>
+                    <div class="video-container">
+                        <iframe src="https://www.youtube.com/embed/CCuc54qZPEA?rel=0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
+                    </div>
+                    <div class="theme-quote">
+                        <p>La empatía es el puente que une las diferencias. Implica escuchar sin juzgar, entender antes de responder y actuar desde el respeto. En la convivencia, cada palabra y cada gesto cuentan. Cuando elegimos comprender en lugar de reaccionar, transformamos los conflictos en oportunidades para aprender y fortalecer los lazos que nos unen.</p>
+                    </div>
+                </div>
+                
+                <div class="highlight">
+                    <p><strong>Objetivo pedagógico:</strong> Desarrollar la empatía, la comunicación asertiva y la convivencia pacífica entre pares, fortaleciendo las habilidades socioemocionales esenciales para una comunidad escolar saludable.</p>
+                </div>
+            </div>
+        </div>
+        
+        <!-- EmoTeca -->
+        <div class="section">
+            <h2 class="section-title">Bienvenido a la EmoTeca</h2>
+            <p>Aquí encontrarás una selección de videos y recursos que te ayudarán a comprenderte mejor, fortalecer tus habilidades emocionales y descubrir nuevas formas de cuidar tu bienestar.</p>
+            
+            <div class="emoteca-grid">
+                <div class="video-card">
+                    <div class="video-container">
+                        <iframe src="https://www.youtube.com/embed/w6LEC7UuVO0?rel=0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
+                    </div>
+                    <h3>Cómo encontrarle sentido a tu vida</h3>
+                    <p>Superviviente del Holocausto comparte su perspectiva sobre el significado de la vida</p>
+                </div>
+                
+                <div class="video-card">
+                    <div class="video-container">
+                        <iframe src="https://www.youtube.com/embed/0noAwrWY78U?rel=0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
+                    </div>
+                    <h3>El cerebro contra el estrés</h3>
+                    <p>Marian Rojas Estapé, psiquiatra y escritora</p>
+                </div>
+                
+                <div class="video-card">
+                    <div class="video-container">
+                        <iframe src="https://www.youtube.com/embed/OvgbMajFhmE?rel=0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
+                    </div>
+                    <h3>Las emociones y sus funciones</h3>
+                    <p>¿Por qué es tan importante conocerlas? | Psi Mammoliti</p>
+                </div>
+                
+                <div class="video-card">
+                    <div class="video-container">
+                        <iframe src="https://www.youtube.com/embed/EmcaRSKHAgI?rel=0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
+                    </div>
+                    <h3>¿Amamos como nos amaron?</h3>
+                    <p>Marian Rojas Estapé</p>
+                </div>
+                
+                <div class="video-card">
+                    <div class="video-container">
+                        <iframe src="https://www.youtube.com/embed/ILWTw72acs8?rel=0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
+                    </div>
+                    <h3>Aprender a controlar tus emociones</h3>
+                    <p>Nilda Chiaraviglio</p>
+                </div>
+                
+                <div class="video-card">
+                    <div class="video-container">
+                        <iframe src="https://www.youtube.com/embed/IShkpOm63gg?rel=0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
+                    </div>
+                    <h3>Cómo meditar por primera vez</h3>
+                    <p>Una meditación guiada para principiantes</p>
+                </div>
+                
+                <div class="video-card">
+                    <div class="video-container">
+                        <iframe src="https://www.youtube.com/embed/A-FKeahD_lQ?rel=0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
+                    </div>
+                    <h3>Gestión emocional práctica</h3>
+                    <p>Ejercicios para el día a día</p>
+                </div>
+            </div>
+            
+            <div class="highlight" style="text-align: center; margin-top: 25px;">
+                <p>Cada enlace es una invitación a detenerte, reflexionar y crecer: aprender a reconocer tus emociones, gestionar el estrés, fortalecer tu autoestima, mejorar la convivencia, educarte emocionalmente.</p>
+                <p><strong>Explora, elige y permite que cada video te inspire a construir una versión más consciente, empática y feliz de ti mismo.</strong></p>
+            </div>
+        </div>
+        
+        <footer>
+            <p>Cuidando mi Mente - Aprendizaje digital y bienestar emocional</p>
+            <p>© 2024-2025 - Todos los derechos reservados</p>
+        </footer>
+    </div>
+</body>
+</html>
