@@ -360,6 +360,23 @@
             line-height: 1.5;
         }
         
+        .function-section {
+            background: #f0f4f8;
+            padding: 20px;
+            border-radius: 10px;
+            margin: 20px 0;
+            border-left: 4px solid var(--emotion);
+        }
+        
+        .reflection-section {
+            background: #fff8e1;
+            padding: 20px;
+            border-radius: 10px;
+            margin: 20px 0;
+            border-left: 4px solid #ffb300;
+            font-style: italic;
+        }
+        
         .close-btn {
             background-color: var(--emotion);
             color: white;
@@ -459,7 +476,7 @@
                     
                     <div class="emotion-card" data-emotion="anger">
                         <div class="emotion-icon anger">😠</div>
-                        <div class="emotion-name">Enojo</div>
+                        <div class="emotion-name">Ira</div>
                     </div>
                     
                     <div class="emotion-card" data-emotion="fear">
@@ -602,127 +619,146 @@
     </div>
 
     <script>
-        // Datos de las emociones para el Mapa
+        // Datos de las emociones para el Mapa - CONTENIDO ACTUALIZADO
         const emotionsData = {
             joy: {
                 name: "Alegría",
                 icon: "😊",
-                description: "La alegría es una emoción positiva que experimentamos cuando algo bueno sucede en nuestras vidas. Nos hace sentir felices, contentos y satisfechos.",
+                description: "La alegría es una emoción expansiva que aparece cuando experimentamos bienestar, logro o conexión. Es una reacción natural ante lo que nos resulta placentero o significativo.",
+                function: "Su función es reforzar conductas positivas y promover los vínculos sociales. Nos impulsa a compartir, crear y disfrutar. Biológicamente, la alegría libera dopamina y endorfinas, neurotransmisores que aumentan la motivación y reducen el estrés.",
                 strategies: [
-                    "Comparte tu alegría con otros para multiplicarla",
-                    "Practica la gratitud diariamente",
-                    "Realiza actividades que te hagan feliz",
-                    "Celebra los pequeños logros",
-                    "Rodéate de personas positivas"
-                ]
+                    "Cultiva la gratitud diaria: anota tres cosas buenas de tu día.",
+                    "Comparte lo que te hace bien, la alegría crece al compartirse.",
+                    "Escucha música o realiza actividades que activen tu cuerpo y mente.",
+                    "Aprende a saborear los momentos en lugar de apresurarlos."
+                ],
+                reflection: "Marian Rojas Estapé dice que 'la felicidad no es un estado constante, sino momentos de conexión con el presente'. La alegría surge cuando estamos conscientes, agradecidos y conectados con lo que tenemos ahora, no cuando perseguimos lo que falta."
             },
             sadness: {
                 name: "Tristeza",
                 icon: "😢",
-                description: "La tristeza es una emoción que surge ante la pérdida, el desengaño o situaciones difíciles. Nos ayuda a procesar el dolor y a reflexionar.",
+                description: "Es una emoción que nos invita al recogimiento, a mirar hacia adentro y procesar lo vivido.",
+                function: "Tiene una función reparadora y reflexiva. Nos ayuda a elaborar duelos, aceptar lo inevitable y pedir apoyo. Sin tristeza, no habría aprendizaje ni transformación.",
                 strategies: [
-                    "Permítete sentir y expresar tu tristeza",
-                    "Habla con alguien de confianza sobre lo que sientes",
-                    "Realiza actividades tranquilas como leer o escuchar música",
-                    "Escribe en un diario tus pensamientos y emociones",
-                    "Practica el autocuidado y date tiempo para sanar"
-                ]
+                    "Date permiso de sentir sin culpa.",
+                    "Escribe o dibuja lo que sientes para liberar la carga.",
+                    "Busca compañía o apoyo emocional.",
+                    "Haz pausas suaves: caminar, respirar, descansar.",
+                    "Recuerda: después de la tristeza, llega claridad."
+                ],
+                reflection: "Marian Rojas Estapé explica que 'la tristeza bien gestionada nos humaniza'. No debemos huir de ella, sino escucharla y dejar que cumpla su papel. Reprimirla puede derivar en apatía o ansiedad. Aceptarla, en cambio, fortalece nuestra resiliencia y empatía."
             },
             anger: {
-                name: "Enojo",
+                name: "Ira",
                 icon: "😠",
-                description: "El enojo surge cuando sentimos que hemos sido tratados injustamente o cuando nuestras necesidades no son satisfechas. Es una señal de que algo nos importa.",
+                description: "La ira es una emoción intensa que surge cuando percibimos una injusticia, amenaza o falta de respeto. Nos da energía y fuerza para defendernos o corregir lo que no está bien.",
+                function: "Su función es proteger límites personales y valores. Bien canalizada, la ira impulsa el cambio, la justicia y la defensa propia. Mal gestionada, puede destruir relaciones o dañar la salud.",
                 strategies: [
-                    "Respira profundamente antes de reaccionar",
-                    "Identifica la causa real de tu enojo",
-                    "Expresa tus sentimientos de manera asertiva",
-                    "Practica técnicas de relajación",
-                    "Realiza actividad física para liberar la tensión"
-                ]
+                    "Antes de reaccionar, respira o aléjate unos minutos.",
+                    "Pregúntate: '¿Qué necesidad mía fue vulnerada?'.",
+                    "Expresa con palabras, no con impulsos.",
+                    "Transforma la energía en movimiento o arte.",
+                    "Aprende a decir 'no' sin culpa."
+                ],
+                reflection: "Marian Rojas Estapé enseña que la ira 'es energía pura; si no la transformas, te consume'. El desafío está en identificar el origen (qué valor fue tocado) y expresar la emoción de manera asertiva, no reactiva."
             },
             fear: {
                 name: "Miedo",
                 icon: "😨",
-                description: "El miedo es una respuesta natural ante situaciones percibidas como peligrosas. Nos prepara para enfrentar amenazas o evitarlas.",
+                description: "Surge ante la posibilidad de un peligro, real o imaginado. Activa nuestro sistema nervioso para defendernos o escapar.",
+                function: "Su función es protegernos y ayudarnos a anticipar riesgos. El miedo nos mantiene alerta, pero cuando domina nuestra mente, puede paralizarnos o limitar nuestro crecimiento.",
                 strategies: [
-                    "Identifica si el miedo es real o imaginario",
-                    "Respira profundamente para calmarte",
-                    "Divide el problema en partes más pequeñas y manejables",
-                    "Visualiza el resultado positivo que deseas",
-                    "Busca apoyo en personas de confianza"
-                ]
+                    "Practica respiración consciente para calmar el cuerpo.",
+                    "Nombra tu miedo: 'Tengo miedo de...', y observa si es real o imaginario.",
+                    "Da pasos pequeños hacia lo que temes.",
+                    "Sustituye el '¿y si sale mal?' por '¿y si sale bien?'."
+                ],
+                reflection: "Marian Rojas Estapé dice que 'el miedo se combate con información y acción'. Nuestro cerebro activa la amígdala cuando percibe una amenaza, pero la calma se recupera cuando entendemos lo que ocurre y tomamos pequeñas decisiones conscientes."
             },
             surprise: {
                 name: "Sorpresa",
                 icon: "😲",
-                description: "La sorpresa es una emoción breve que aparece ante lo inesperado. Puede ser positiva o negativa dependiendo del contexto.",
+                description: "La sorpresa aparece ante lo inesperado, positivo o negativo. Es breve pero intensa, y prepara al cerebro para procesar algo nuevo.",
+                function: "Su función es favorecer la atención y el aprendizaje. Nos permite adaptarnos rápidamente a los cambios y activar la curiosidad.",
                 strategies: [
-                    "Tómate un momento para procesar la situación",
-                    "Mantén la mente abierta ante lo nuevo",
-                    "Aprovecha las sorpresas positivas como oportunidades",
-                    "Aprende a adaptarte a los cambios inesperados",
-                    "Comparte la sorpresa con otros"
-                ]
+                    "Acepta que la vida tiene imprevistos.",
+                    "Entrena la curiosidad en lugar del control.",
+                    "Busca oportunidades en lo que no esperabas.",
+                    "Practica la mentalidad de aprendiz: '¿Qué puedo descubrir aquí?'."
+                ],
+                reflection: "Marian Rojas Estapé afirma que 'la sorpresa es la puerta a la creatividad y la apertura mental'. Aceptar lo inesperado con flexibilidad mejora nuestra capacidad de adaptación y reduce el estrés."
             },
             disgust: {
                 name: "Disgusto",
                 icon: "🤢",
-                description: "El disgusto es una reacción de rechazo ante algo que consideramos desagradable, ofensivo o repulsivo. Nos protege de posibles peligros.",
+                description: "El disgusto es una emoción que surge cuando algo nos resulta molesto, desagradable o contrario a nuestras expectativas. Puede aparecer ante una situación injusta, una actitud ajena o incluso ante nosotros mismos cuando no actuamos como quisiéramos.",
+                function: "El disgusto tiene una función reguladora: nos ayuda a identificar lo que nos desagrada y a tomar distancia o corregir aquello que no está bien. A nivel emocional, actúa como un 'semáforo amarillo' que dice: 'Esto no me gusta, necesito revisar o ajustar algo.'",
                 strategies: [
-                    "Identifica la fuente específica de tu disgusto",
-                    "Expresa tus límites de manera respetuosa",
-                    "Busca alternativas que te resulten más agradables",
-                    "Practica la tolerancia cuando sea apropiado",
-                    "Enfoca tu atención en cosas que te generen bienestar"
-                ]
+                    "Reconoce la causa: Pregúntate qué te incomodó realmente.",
+                    "Respira y espera antes de actuar: a veces el disgusto baja solo al darte unos minutos.",
+                    "Exprésalo de forma asertiva: di lo que piensas sin herir.",
+                    "Libera la tensión física: camina, estira, respira.",
+                    "Reflexiona: ¿lo que te disgusta depende de ti o de otro?",
+                    "Elige tu energía: no todo lo que molesta merece una reacción."
+                ],
+                reflection: "Marian Rojas Estapé explica que el disgusto no debe reprimirse ni dramatizarse. 'Cuando sientas disgusto, no reacciones desde el impulso, observa el mensaje que hay detrás.' Ella enseña que esta emoción puede revelar fatiga, estrés o frustración acumulada, y que al escucharla con calma, nos permite actuar con inteligencia emocional en lugar de reaccionar con irritación."
             },
             love: {
                 name: "Amor",
                 icon: "❤️",
-                description: "El amor es una emoción profunda de afecto, conexión y cuidado hacia otros o hacia nosotros mismos. Fortalece los vínculos humanos.",
+                description: "Es una emoción compleja y profunda que une, sostiene y da sentido a nuestra vida. No se limita a la pareja: también abarca el amor propio, la empatía, la amistad, la gratitud y el servicio a los demás.",
+                function: "El amor cumple una función vinculante y reparadora. Promueve la cooperación, la confianza y el bienestar físico y emocional. A nivel biológico, activa la oxitocina, una hormona que reduce el estrés y genera calma, seguridad y conexión.",
                 strategies: [
-                    "Practica el amor propio y el autocuidado",
-                    "Expresa tu afecto a las personas importantes",
-                    "Realiza actos de bondad sin esperar nada a cambio",
-                    "Cultiva relaciones significativas",
-                    "Aprende a recibir amor de los demás"
-                ]
+                    "Practica el amor propio: háblate con amabilidad.",
+                    "Expresa afecto con gestos, palabras y presencia.",
+                    "Agradece las personas que te acompañan.",
+                    "Perdona, no para justificar, sino para liberarte.",
+                    "Recuerda que el amor es acción, no solo emoción."
+                ],
+                reflection: "'El amor no es solo una emoción, es una decisión consciente. Amar es elegir mirar al otro con comprensión y generosidad, incluso cuando no todo es perfecto.' Para Marian, el amor es la energía más poderosa del cerebro: equilibra nuestras emociones y da estabilidad a nuestra mente."
             },
             calm: {
                 name: "Calma",
                 icon: "😌",
-                description: "La calma es un estado de tranquilidad y serenidad mental. Nos permite pensar con claridad y tomar decisiones conscientes.",
+                description: "La calma es una emoción y un estado del sistema nervioso que aparece cuando nos sentimos seguros y equilibrados. Es el espacio interior donde el cuerpo y la mente se alinean para pensar con claridad.",
+                function: "Su función es regular nuestras reacciones y permitir que actuemos desde la conciencia, no desde el impulso. Estar en calma fortalece el sistema inmunológico y mejora la concentración y la toma de decisiones.",
                 strategies: [
-                    "Practica la respiración consciente",
-                    "Realiza meditación o mindfulness",
-                    "Pasa tiempo en la naturaleza",
-                    "Establece límites saludables",
-                    "Crea un espacio tranquilo en tu hogar"
-                ]
+                    "Practica la respiración lenta y profunda.",
+                    "Haz pausas conscientes durante el día.",
+                    "Rodéate de entornos tranquilos o naturales.",
+                    "Medita, ora o escribe lo que te preocupa.",
+                    "Reduce la sobreestimulación (pantallas, ruido)."
+                ],
+                reflection: "'La calma no es ausencia de problemas, es la capacidad de mantener la serenidad en medio de ellos.' Marian enseña que alcanzar la calma requiere entrenar la atención en el presente, cuidar el descanso, la alimentación y aprender a detener los pensamientos rumiantes."
             },
             anxiety: {
                 name: "Ansiedad",
                 icon: "😰",
-                description: "La ansiedad es una respuesta de anticipación ante situaciones percibidas como amenazantes. Puede ser útil en pequeñas dosis pero problemática en exceso.",
+                description: "Surge cuando la mente se adelanta al futuro o se enfoca en lo que no puede controlar. Su intensidad puede variar desde una leve inquietud hasta una sensación de agobio o miedo constante.",
+                function: "En su justa medida, la ansiedad nos prepara para actuar ante desafíos. Pero cuando se vuelve permanente, agota la mente y el cuerpo. Es una alarma que nos indica que hay algo pendiente por atender o soltar.",
                 strategies: [
-                    "Practica técnicas de respiración profunda",
-                    "Identifica y cuestiona tus pensamientos catastróficos",
-                    "Divide las tareas grandes en pasos pequeños",
-                    "Establece una rutina diaria estructurada",
-                    "Busca apoyo profesional si es necesario"
-                ]
+                    "Aterriza al presente: observa, respira, siente.",
+                    "Organiza lo que puedes controlar, suelta lo que no.",
+                    "Camina o haz ejercicio para liberar la tensión.",
+                    "Cuida el sueño, el descanso y la alimentación.",
+                    "Reduce la sobreexposición a noticias o redes.",
+                    "No creas lo que piensas cuando estás experimentando ansiedad."
+                ],
+                reflection: "'La ansiedad nace cuando vivimos desconectados del presente. La mente está en el futuro, el cuerpo en el presente y el corazón en el pasado.' Marian explica que no debemos luchar contra la ansiedad, sino escucharla y entender qué mensaje trae: muchas veces nos está pidiendo descanso, límites o autocuidado."
             },
             hope: {
                 name: "Esperanza",
                 icon: "🤞",
-                description: "La esperanza es la creencia positiva de que el futuro puede ser mejor. Nos da fuerza para perseverar ante las dificultades.",
+                description: "La esperanza es una emoción serena y luminosa que aparece cuando confiamos en que algo bueno puede suceder, aun en medio de la incertidumbre o la adversidad. No es ingenuidad ni simple optimismo: es una actitud vital que nos permite mantener la fe en nuestras capacidades, en los demás y en el futuro.",
+                function: "Su función principal es mantenernos en movimiento y darnos energía emocional para enfrentar las dificultades. La esperanza actúa como un motor invisible que conecta nuestra mente y nuestro corazón con la posibilidad del cambio. A nivel biológico, está asociada con la dopamina, el neurotransmisor del impulso y la motivación, lo cual refuerza la conducta dirigida a metas.",
                 strategies: [
-                    "Visualiza resultados positivos",
-                    "Establece metas realistas y alcanzables",
-                    "Rodéate de personas optimistas",
-                    "Encuentra inspiración en historias de superación",
-                    "Celebra los pequeños progresos"
-                ]
+                    "Piensa en lo que sí puedes controlar: enfócate en las acciones posibles, no en los temores.",
+                    "Visualiza un futuro positivo: dedica unos minutos al día a imaginar un resultado esperanzador.",
+                    "Rodéate de personas que sumen: la esperanza se contagia a través del ejemplo y la energía de los demás.",
+                    "Agradece lo pequeño: reconocer los avances alimenta el optimismo realista.",
+                    "Crea rituales de sentido: escribir afirmaciones, encender una vela o salir a caminar puede ayudarte a reconectar con la confianza en la vida."
+                ],
+                reflection: "'La esperanza no consiste en creer que todo saldrá bien, sino en confiar en que podrás afrontar lo que venga.' Marian enseña que la esperanza protege la mente del desgaste emocional. Cuando se pierde la esperanza, se activa el estrés, el cortisol y la sensación de que nada tiene sentido. En cambio, cuando la cultivamos, nuestro cerebro percibe futuro, propósito y calma interior."
             }
         };
 
@@ -756,9 +792,17 @@
                 <div class="detail-description">
                     <p>${data.description}</p>
                 </div>
+                <div class="function-section">
+                    <h3>Función e importancia:</h3>
+                    <p>${data.function}</p>
+                </div>
                 <div class="strategies">
                     <h3>Estrategias para gestionar esta emoción:</h3>
                     <ul>${strategiesHTML}</ul>
+                </div>
+                <div class="reflection-section">
+                    <h3>Reflexión de la médico y psiquiatra Marian Rojas Estapé:</h3>
+                    <p>${data.reflection}</p>
                 </div>
                 <button class="close-btn">Cerrar</button>
             `;
