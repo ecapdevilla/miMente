@@ -3,7 +3,6 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <meta name="google" content="notranslate">
     <title>Ponte en mi Lugar | Empatía y Convivencia Escolar</title>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
     <style>
@@ -450,6 +449,127 @@
             color: #666;
         }
         
+        /* Estilos para los juegos específicos */
+        .game-content {
+            background: #f8f9fa;
+            border-radius: 15px;
+            padding: 25px;
+            margin-top: 20px;
+        }
+        
+        .game-question {
+            font-size: 1.2rem;
+            margin-bottom: 20px;
+            font-weight: bold;
+            color: var(--primary);
+        }
+        
+        .game-options {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            gap: 15px;
+            margin-bottom: 20px;
+        }
+        
+        .game-option {
+            background: white;
+            border-radius: 10px;
+            padding: 15px;
+            cursor: pointer;
+            transition: all 0.3s;
+            border: 2px solid transparent;
+        }
+        
+        .game-option:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 5px 10px rgba(0,0,0,0.1);
+        }
+        
+        .game-option.selected {
+            border-color: var(--primary);
+            background: #e8f0fe;
+        }
+        
+        .game-feedback {
+            padding: 15px;
+            border-radius: 10px;
+            margin-top: 20px;
+            display: none;
+        }
+        
+        .game-feedback.correct {
+            background: #e8f5e8;
+            border-left: 5px solid var(--success);
+            display: block;
+        }
+        
+        .game-feedback.incorrect {
+            background: #fde8ec;
+            border-left: 5px solid var(--warning);
+            display: block;
+        }
+        
+        .emotion-match-container {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            gap: 15px;
+        }
+        
+        .emotion-card {
+            background: white;
+            border-radius: 10px;
+            padding: 20px;
+            text-align: center;
+            cursor: pointer;
+            transition: all 0.3s;
+            border: 2px solid transparent;
+        }
+        
+        .emotion-card:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 5px 10px rgba(0,0,0,0.1);
+        }
+        
+        .emotion-card.selected {
+            border-color: var(--primary);
+        }
+        
+        .emotion-emoji {
+            font-size: 3rem;
+            margin-bottom: 10px;
+        }
+        
+        .emotion-name {
+            font-weight: bold;
+            margin-bottom: 10px;
+        }
+        
+        .perspective-scenario {
+            background: white;
+            border-radius: 10px;
+            padding: 20px;
+            margin-bottom: 20px;
+            border-left: 5px solid var(--primary);
+        }
+        
+        .perspective-options {
+            display: flex;
+            flex-direction: column;
+            gap: 15px;
+        }
+        
+        .perspective-option {
+            background: #f8f9fa;
+            border-radius: 10px;
+            padding: 15px;
+            cursor: pointer;
+            transition: all 0.3s;
+        }
+        
+        .perspective-option:hover {
+            background: #e8f0fe;
+        }
+        
         /* Estilos para reflexión */
         .reflection-container {
             background: white;
@@ -595,7 +715,7 @@
 <body>
     <div class="container">
         <header>
-            <a href="https://ecapdevilla.github.io/miMente/" class="back-link">
+            <a href="index.html" class="back-link">
                 <i class="fas fa-arrow-left"></i> Volver al Inicio
             </a>
             <h1>Ponte en mi Lugar</h1>
@@ -742,7 +862,7 @@
                 </div>
             </div>
             
-            <div id="game-content">
+            <div id="game-content" class="game-content">
                 <!-- El contenido del juego seleccionado aparecerá aquí -->
             </div>
             
@@ -785,7 +905,7 @@
         <div class="external-link">
             <h2>¿Quieres seguir desarrollando tu empatía?</h2>
             <p>Visita nuestro sitio principal para acceder a más recursos sobre inteligencia emocional, habilidades sociales y convivencia escolar.</p>
-            <a href="https://cuidando-mi-mente-e2ubix2.gamma.site/" class="btn btn-accent" target="_blank">Visitar sitio principal</a>
+            <a href="index.html" class="btn btn-accent" target="_blank">Visitar sitio principal</a>
         </div>
         
         <footer>
@@ -871,6 +991,7 @@
         const games = {
             'empathy-quiz': {
                 title: 'Quiz de Empatía',
+                description: 'Pon a prueba tu comprensión de las emociones ajenas',
                 questions: [
                     {
                         question: "Tu compañero llega a clase con los ojos rojos y no habla con nadie. ¿Cuál es la respuesta más empática?",
@@ -880,7 +1001,8 @@
                             "Contar a otros que parece que ha estado llorando",
                             "Hacer bromas para animarlo"
                         ],
-                        correct: 1
+                        correct: 1,
+                        feedback: "Preguntar discretamente muestra interés genuino por su bienestar sin invadir su espacio personal."
                     },
                     {
                         question: "Un amigo saca una mala nota en un examen importante. ¿Qué harías?",
@@ -890,21 +1012,107 @@
                             "Preguntarle cómo se siente y ofrecer ayuda",
                             "Criticar al profesor por el examen difícil"
                         ],
-                        correct: 2
+                        correct: 2,
+                        feedback: "Validar sus sentimientos y ofrecer apoyo es la respuesta más empática."
+                    },
+                    {
+                        question: "Ves que un compañero está siendo excluido del grupo. ¿Qué haces?",
+                        options: [
+                            "No te involucras para evitar problemas",
+                            "Te unes al grupo para no ser excluido tú también",
+                            "Incluyes al compañero en tu grupo de trabajo",
+                            "Le dices al profesor para que intervenga"
+                        ],
+                        correct: 2,
+                        feedback: "Incluir activamente a quien está siendo excluido es un acto de empatía que puede cambiar su día."
                     }
                 ]
             },
             'conflict-resolution': {
                 title: 'Resolución de Conflictos',
-                description: 'Aprende estrategias para mediar en situaciones conflictivas de manera empática.'
+                description: 'Aprende a mediar en situaciones difíciles',
+                scenarios: [
+                    {
+                        situation: "Dos compañeros discuten acaloradamente sobre cómo hacer un trabajo en grupo. Ambos creen que su idea es la mejor.",
+                        question: "¿Cuál sería tu enfoque para ayudar a resolver este conflicto?",
+                        options: [
+                            "Elegir la idea que parece mejor y decirles que la sigan",
+                            "Escuchar a ambos y ayudarles a encontrar puntos en común",
+                            "Decirles que se calmen y se pongan de acuerdo solos",
+                            "Dividir el trabajo para que cada uno haga su parte por separado"
+                        ],
+                        correct: 1,
+                        feedback: "Facilitar la comunicación y buscar soluciones que integren ambas perspectivas es clave para la resolución pacífica de conflictos."
+                    },
+                    {
+                        situation: "Un amigo te cuenta que otro amigo le dijo algo que le dolió mucho. Está muy molesto y considera terminar la amistad.",
+                        question: "¿Cómo ayudarías en esta situación?",
+                        options: [
+                            "Decirle que tiene razón en estar enojado y apoyar su decisión",
+                            "Convencerlo de que perdone a su amigo inmediatamente",
+                            "Animarle a hablar con su amigo para entender lo que pasó",
+                            "Ofrecerte a hablar con el otro amigo en su lugar"
+                        ],
+                        correct: 2,
+                        feedback: "Fomentar la comunicación directa permite que ambas partes se entiendan y posiblemente resuelvan el malentendido."
+                    }
+                ]
             },
             'emotion-match': {
                 title: 'Identifica Emociones',
-                description: 'Relaciona expresiones faciales y situaciones con las emociones correspondientes.'
+                description: 'Relaciona expresiones con emociones',
+                emotions: [
+                    { emoji: "😊", name: "Felicidad", description: "Sentimiento de alegría y satisfacción" },
+                    { emoji: "😢", name: "Tristeza", description: "Sentimiento de pena o desánimo" },
+                    { emoji: "😠", name: "Enojo", description: "Sentimiento de irritación o furia" },
+                    { emoji: "😨", name: "Miedo", description: "Sentimiento de temor o ansiedad" },
+                    { emoji: "😲", name: "Sorpresa", description: "Reacción ante algo inesperado" },
+                    { emoji: "😒", name: "Desagrado", description: "Sentimiento de desaprobación o aversión" }
+                ]
             },
             'perspective-taking': {
                 title: 'Toma de Perspectiva',
-                description: 'Practica ver las situaciones desde diferentes puntos de vista.'
+                description: 'Mira las situaciones desde diferentes ángulos',
+                scenarios: [
+                    {
+                        situation: "María siempre llega tarde a clase. El profesor le ha llamado la atención varias veces.",
+                        perspectives: [
+                            {
+                                person: "El profesor",
+                                view: "Piensa que María es irresponsable y no valora su educación"
+                            },
+                            {
+                                person: "María",
+                                view: "Tiene que cuidar de sus hermanos menores por las mañanas porque sus padres trabajan temprano"
+                            },
+                            {
+                                person: "Compañero de clase",
+                                view: "Cree que María es una vaga y que afecta el ambiente de la clase"
+                            }
+                        ],
+                        question: "¿Cómo cambiaría tu percepción de María al conocer su situación?",
+                        feedback: "Entender las circunstancias de los demás nos ayuda a desarrollar empatía y evitar juicios precipitados."
+                    },
+                    {
+                        situation: "Carlos no quiere participar en actividades grupales y prefiere trabajar solo.",
+                        perspectives: [
+                            {
+                                person: "Carlos",
+                                view: "Se siente ansioso en grupos grandes y teme decir algo incorrecto"
+                            },
+                            {
+                                person: "Compañeros",
+                                view: "Piensan que Carlos es antisocial y no quiere colaborar"
+                            },
+                            {
+                                person: "Profesor",
+                                view: "Cree que Carlos necesita desarrollar habilidades sociales"
+                            }
+                        ],
+                        question: "¿Cómo podrías ayudar a Carlos a sentirse más cómodo en el grupo?",
+                        feedback: "Crear un ambiente inclusivo donde todos se sientan seguros para participar es fundamental para la convivencia escolar."
+                    }
+                ]
             }
         };
 
@@ -913,12 +1121,16 @@
         let empathyScore = 0;
         let selectedOption = null;
         let sharedReflections = [];
+        let currentGame = null;
+        let currentQuestion = 0;
+        let gameScore = 0;
 
         // Elementos del DOM
         const simulationContainer = document.getElementById('simulation-container');
         const gamesContainer = document.getElementById('games-container');
         const reflectionContainer = document.getElementById('reflection-container');
         const completionMessage = document.getElementById('completion-message');
+        const gameContent = document.getElementById('game-content');
 
         // Inicializar la actividad
         function initActivity() {
@@ -1067,91 +1279,295 @@
 
         // Mostrar selección de juegos
         function showGameSelection() {
-            document.getElementById('game-content').innerHTML = `
+            gameContent.innerHTML = `
                 <p style="text-align: center; color: #666; margin-top: 20px;">Selecciona un juego de la cuadrícula para comenzar</p>
             `;
+            currentGame = null;
         }
 
         // Iniciar juego
         function startGame(gameId) {
+            currentGame = gameId;
             const game = games[gameId];
-            let gameHTML = '';
+            gameScore = 0;
+            currentQuestion = 0;
             
             if (gameId === 'empathy-quiz') {
-                gameHTML = `
-                    <h3 style="color: var(--primary); text-align: center; margin-bottom: 20px;">${game.title}</h3>
-                    <div id="quiz-questions">
-                        <!-- Las preguntas del quiz se cargarán aquí -->
-                    </div>
-                `;
-                
-                // Cargar primera pregunta
-                loadQuizQuestion(0);
-            } else {
-                gameHTML = `
-                    <h3 style="color: var(--primary); text-align: center; margin-bottom: 20px;">${game.title}</h3>
-                    <p style="text-align: center; margin-bottom: 20px;">${game.description}</p>
-                    <div style="text-align: center; padding: 40px; background: #f8f9fa; border-radius: 10px;">
-                        <p style="color: #666; margin-bottom: 20px;">Este juego simula una experiencia interactiva sobre ${game.title.toLowerCase()}.</p>
-                        <button class="btn" onclick="showGameSelection()">Volver a la selección de juegos</button>
-                    </div>
-                `;
+                startEmpathyQuiz();
+            } else if (gameId === 'conflict-resolution') {
+                startConflictResolution();
+            } else if (gameId === 'emotion-match') {
+                startEmotionMatch();
+            } else if (gameId === 'perspective-taking') {
+                startPerspectiveTaking();
             }
-            
-            document.getElementById('game-content').innerHTML = gameHTML;
         }
 
-        // Cargar pregunta del quiz
-        function loadQuizQuestion(questionIndex) {
+        // Iniciar Quiz de Empatía
+        function startEmpathyQuiz() {
             const game = games['empathy-quiz'];
-            if (questionIndex >= game.questions.length) {
-                document.getElementById('quiz-questions').innerHTML = `
-                    <div style="text-align: center; padding: 30px; background: #e8f5e8; border-radius: 10px;">
-                        <h4 style="color: var(--success); margin-bottom: 15px;">¡Quiz Completado!</h4>
-                        <p>Has practicado tu capacidad de identificar respuestas empáticas.</p>
-                        <button class="btn" onclick="showGameSelection()" style="margin-top: 15px;">Volver a juegos</button>
-                    </div>
-                `;
+            if (currentQuestion >= game.questions.length) {
+                showGameResults();
                 return;
             }
             
-            const question = game.questions[questionIndex];
+            const question = game.questions[currentQuestion];
             let optionsHTML = '';
             
             question.options.forEach((option, index) => {
                 optionsHTML += `
-                    <div class="option-card" onclick="checkQuizAnswer(${questionIndex}, ${index})">
-                        <div class="option-text">${option}</div>
+                    <div class="game-option" onclick="checkQuizAnswer(${index})">
+                        ${option}
                     </div>
                 `;
             });
             
-            document.getElementById('quiz-questions').innerHTML = `
-                <div style="margin-bottom: 25px;">
-                    <p style="font-weight: bold; margin-bottom: 15px;">${questionIndex + 1}. ${question.question}</p>
-                    <div class="options-container">
-                        ${optionsHTML}
-                    </div>
+            gameContent.innerHTML = `
+                <h3 class="game-question">${currentQuestion + 1}. ${question.question}</h3>
+                <div class="game-options">
+                    ${optionsHTML}
+                </div>
+                <div id="quiz-feedback" class="game-feedback"></div>
+                <div class="action-buttons">
+                    <button class="btn" id="next-question" style="display: none;" onclick="nextQuizQuestion()">Siguiente Pregunta</button>
                 </div>
             `;
         }
 
         // Verificar respuesta del quiz
-        function checkQuizAnswer(questionIndex, selectedIndex) {
+        function checkQuizAnswer(selectedIndex) {
             const game = games['empathy-quiz'];
-            const question = game.questions[questionIndex];
+            const question = game.questions[currentQuestion];
             const isCorrect = selectedIndex === question.correct;
             
-            let feedback = '';
+            // Marcar opción seleccionada
+            document.querySelectorAll('.game-option').forEach((option, index) => {
+                if (index === selectedIndex) {
+                    option.classList.add('selected');
+                }
+            });
+            
+            // Mostrar feedback
+            const feedback = document.getElementById('quiz-feedback');
             if (isCorrect) {
-                feedback = '<div style="color: var(--success); font-weight: bold; margin: 15px 0;">¡Correcto! Esta es la respuesta más empática.</div>';
+                feedback.className = 'game-feedback correct';
+                feedback.innerHTML = `<strong>¡Correcto!</strong> ${question.feedback}`;
+                gameScore++;
             } else {
-                feedback = '<div style="color: var(--warning); font-weight: bold; margin: 15px 0;">Puedes considerar un enfoque más empático.</div>';
+                feedback.className = 'game-feedback incorrect';
+                feedback.innerHTML = `<strong>Respuesta incorrecta.</strong> La opción correcta es: "${question.options[question.correct]}". ${question.feedback}`;
             }
             
-            document.getElementById('quiz-questions').innerHTML += `
-                ${feedback}
-                <button class="btn" onclick="loadQuizQuestion(${questionIndex + 1})" style="margin-top: 10px;">Siguiente Pregunta</button>
+            // Mostrar botón siguiente
+            document.getElementById('next-question').style.display = 'block';
+        }
+
+        // Siguiente pregunta del quiz
+        function nextQuizQuestion() {
+            currentQuestion++;
+            startEmpathyQuiz();
+        }
+
+        // Iniciar Resolución de Conflictos
+        function startConflictResolution() {
+            const game = games['conflict-resolution'];
+            if (currentQuestion >= game.scenarios.length) {
+                showGameResults();
+                return;
+            }
+            
+            const scenario = game.scenarios[currentQuestion];
+            let optionsHTML = '';
+            
+            scenario.options.forEach((option, index) => {
+                optionsHTML += `
+                    <div class="game-option" onclick="checkConflictResolutionAnswer(${index})">
+                        ${option}
+                    </div>
+                `;
+            });
+            
+            gameContent.innerHTML = `
+                <div class="perspective-scenario">
+                    <p><strong>Situación:</strong> ${scenario.situation}</p>
+                </div>
+                <h3 class="game-question">${scenario.question}</h3>
+                <div class="game-options">
+                    ${optionsHTML}
+                </div>
+                <div id="conflict-feedback" class="game-feedback"></div>
+                <div class="action-buttons">
+                    <button class="btn" id="next-conflict" style="display: none;" onclick="nextConflictScenario()">Siguiente Situación</button>
+                </div>
+            `;
+        }
+
+        // Verificar respuesta de resolución de conflictos
+        function checkConflictResolutionAnswer(selectedIndex) {
+            const game = games['conflict-resolution'];
+            const scenario = game.scenarios[currentQuestion];
+            const isCorrect = selectedIndex === scenario.correct;
+            
+            // Marcar opción seleccionada
+            document.querySelectorAll('.game-option').forEach((option, index) => {
+                if (index === selectedIndex) {
+                    option.classList.add('selected');
+                }
+            });
+            
+            // Mostrar feedback
+            const feedback = document.getElementById('conflict-feedback');
+            if (isCorrect) {
+                feedback.className = 'game-feedback correct';
+                feedback.innerHTML = `<strong>¡Excelente enfoque!</strong> ${scenario.feedback}`;
+                gameScore++;
+            } else {
+                feedback.className = 'game-feedback incorrect';
+                feedback.innerHTML = `<strong>Hay un enfoque más efectivo.</strong> La opción más empática es: "${scenario.options[scenario.correct]}". ${scenario.feedback}`;
+            }
+            
+            // Mostrar botón siguiente
+            document.getElementById('next-conflict').style.display = 'block';
+        }
+
+        // Siguiente escenario de conflicto
+        function nextConflictScenario() {
+            currentQuestion++;
+            startConflictResolution();
+        }
+
+        // Iniciar Identifica Emociones
+        function startEmotionMatch() {
+            const game = games['emotion-match'];
+            
+            let emotionsHTML = '';
+            game.emotions.forEach(emotion => {
+                emotionsHTML += `
+                    <div class="emotion-card" onclick="showEmotionDescription('${emotion.name}')">
+                        <div class="emotion-emoji">${emotion.emoji}</div>
+                        <div class="emotion-name">${emotion.name}</div>
+                    </div>
+                `;
+            });
+            
+            gameContent.innerHTML = `
+                <h3 class="game-question">Haz clic en cada emoción para aprender sobre ella</h3>
+                <div class="emotion-match-container">
+                    ${emotionsHTML}
+                </div>
+                <div id="emotion-description" class="game-feedback" style="display: none;"></div>
+                <div class="action-buttons" style="margin-top: 30px;">
+                    <button class="btn" onclick="showGameSelection()">Volver a Juegos</button>
+                </div>
+            `;
+        }
+
+        // Mostrar descripción de emoción
+        function showEmotionDescription(emotionName) {
+            const game = games['emotion-match'];
+            const emotion = game.emotions.find(e => e.name === emotionName);
+            
+            const description = document.getElementById('emotion-description');
+            description.style.display = 'block';
+            description.className = 'game-feedback correct';
+            description.innerHTML = `
+                <strong>${emotion.emoji} ${emotion.name}</strong><br>
+                ${emotion.description}
+            `;
+            
+            // Desplazar hacia la descripción
+            description.scrollIntoView({ behavior: 'smooth' });
+        }
+
+        // Iniciar Toma de Perspectiva
+        function startPerspectiveTaking() {
+            const game = games['perspective-taking'];
+            if (currentQuestion >= game.scenarios.length) {
+                showGameResults();
+                return;
+            }
+            
+            const scenario = game.scenarios[currentQuestion];
+            let perspectivesHTML = '';
+            
+            scenario.perspectives.forEach(perspective => {
+                perspectivesHTML += `
+                    <div class="perspective-option">
+                        <strong>${perspective.person}:</strong> ${perspective.view}
+                    </div>
+                `;
+            });
+            
+            gameContent.innerHTML = `
+                <div class="perspective-scenario">
+                    <p><strong>Situación:</strong> ${scenario.situation}</p>
+                </div>
+                <h3 class="game-question">Perspectivas diferentes:</h3>
+                <div class="perspective-options">
+                    ${perspectivesHTML}
+                </div>
+                <h3 class="game-question" style="margin-top: 20px;">${scenario.question}</h3>
+                <textarea class="reflection-input" id="perspective-reflection" placeholder="Escribe tu reflexión aquí..."></textarea>
+                <div class="action-buttons">
+                    <button class="btn" onclick="submitPerspectiveReflection()">Enviar Reflexión</button>
+                    <button class="btn btn-outline" id="next-perspective" style="display: none;" onclick="nextPerspectiveScenario()">Siguiente Situación</button>
+                </div>
+                <div id="perspective-feedback" class="game-feedback" style="display: none;"></div>
+            `;
+        }
+
+        // Enviar reflexión de perspectiva
+        function submitPerspectiveReflection() {
+            const reflection = document.getElementById('perspective-reflection').value.trim();
+            
+            if (!reflection) {
+                alert('Por favor, escribe tu reflexión antes de enviar.');
+                return;
+            }
+            
+            const game = games['perspective-taking'];
+            const scenario = game.scenarios[currentQuestion];
+            
+            const feedback = document.getElementById('perspective-feedback');
+            feedback.style.display = 'block';
+            feedback.className = 'game-feedback correct';
+            feedback.innerHTML = `
+                <strong>¡Gracias por tu reflexión!</strong><br>
+                ${scenario.feedback}
+            `;
+            
+            document.getElementById('next-perspective').style.display = 'block';
+            gameScore++;
+        }
+
+        // Siguiente escenario de perspectiva
+        function nextPerspectiveScenario() {
+            currentQuestion++;
+            startPerspectiveTaking();
+        }
+
+        // Mostrar resultados del juego
+        function showGameResults() {
+            const game = games[currentGame];
+            const totalQuestions = 
+                currentGame === 'empathy-quiz' ? game.questions.length :
+                currentGame === 'conflict-resolution' ? game.scenarios.length :
+                currentGame === 'perspective-taking' ? game.scenarios.length : 1;
+            
+            const percentage = Math.round((gameScore / totalQuestions) * 100);
+            
+            gameContent.innerHTML = `
+                <div style="text-align: center; padding: 30px;">
+                    <h3 style="color: var(--primary); margin-bottom: 20px;">¡Juego Completado!</h3>
+                    <div style="font-size: 3rem; color: var(--primary); margin-bottom: 20px;">${percentage}%</div>
+                    <p style="margin-bottom: 20px;">Has completado <strong>${game.title}</strong> con ${gameScore} de ${totalQuestions} respuestas correctas.</p>
+                    <p style="margin-bottom: 30px;">${percentage >= 70 ? '¡Excelente trabajo! Tu comprensión de la empatía es notable.' : 
+                      percentage >= 50 ? 'Buen trabajo. Sigue practicando para mejorar tus habilidades.' : 
+                      'Sigue practicando. La empatía es una habilidad que se desarrolla con el tiempo.'}</p>
+                    <div class="action-buttons">
+                        <button class="btn" onclick="showGameSelection()">Volver a Juegos</button>
+                    </div>
+                </div>
             `;
         }
 
